@@ -1,0 +1,21 @@
+.aside-header{
+    padding: 10px;
+    background-color: white;
+    display: flex;
+}
+
+.aside-header span {
+    font-size: 22px;
+    font-weight: 700;
+    padding-left: 10px;
+}
+
+.aside-container i{
+    font-size: 22px;
+    padding: 5px 9px;
+    border-radius: 30px;
+    margin-left: auto;
+}
+.aside-container i:hover{
+    background-color:#5470ff;
+}

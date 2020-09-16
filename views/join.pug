@@ -1,0 +1,11 @@
+extends layouts/main
+
+block contents
+    header.welcome-header
+        img.join__img(src="img/logo.png")
+        p.welcome-header__text Jobtreaming의 ID / Password / Room 을 입력하세요.
+    
+    form(action="./join",method="post",id="login-form")
+        input(name="id",type="text",placeholder="ID")
+        input(name="room",type="text",placeholder="Room")
+        input(type="submit",value="Join")

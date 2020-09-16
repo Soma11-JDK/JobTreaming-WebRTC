@@ -1,0 +1,38 @@
+.header{
+    background-color: #5470ff;
+    display: flex;
+    height: 52px;
+    line-height: 52px;
+}
+
+.header__logo{
+    margin: 6px 0 0 10px;
+}
+
+.logo__img{
+    width: 115px;
+    height: 39px;
+    border-radius: 25px;
+}
+
+.header__streamername,
+.header__roomname{
+    margin-left: 40px;
+    color: mintcream;
+}
+
+.haeder__exit{
+    margin-left: auto;
+}
+
+.exit__button:hover{
+    background-color: #3a4fad;
+}
+
+.exit__button{
+    background-color: #455ecd;
+    padding: 8px 19px;
+    border-radius: 20px;
+    margin-right: 12px;
+    color: mintcream;
+}

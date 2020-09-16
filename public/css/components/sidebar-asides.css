@@ -1,0 +1,17 @@
+.sidebar__asides{
+    width:480px;
+}
+
+.aside-container{
+    width: 100%;
+    height: 100%;
+}
+
+.question-container,
+.joinusers-container{
+    display: none;
+}
+
+.aside-container{
+    background-color: whitesmoke;
+}
