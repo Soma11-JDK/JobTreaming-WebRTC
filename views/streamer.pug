@@ -1,1 +1,14 @@
 extends layouts/streaming
+
+block links
+    script(src="js/moving.js")
+    script(src="/socket.io/socket.io.js")
+    script(src="js/broadcast.js")
+
+block footer
+    section.select
+        label Audio source:
+        select(id="audioSource")
+    section.select
+        label Video source:
+        select(id="videoSource")

@@ -1,13 +1,12 @@
-.sidebar__btn{
-    background-color: #f8f9fa;
-    height:100%;
+.sidebar-btn{
+    background-color: #e6e8e9;
+    flex-basis: 66px;
 }
 
 .btn__list{
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
-    background-color: #f8f9fa;
+    background-color: #e6e8e9;
     align-items: center;
 }
 
@@ -24,11 +23,27 @@
     text-align: center;
 }
 
-.item__icon:hover {
+.open-chatting:hover > i {
     opacity: 1;
 }
 
-.btn__list__item:active{
+.open-question:hover > i {
+    opacity: 1;
+} 
 
-    background-color: #e9ecef;
+.open-joinusers:hover > i {
+    opacity: 1;
+} 
+
+
+.i-active{
+    opacity: 1;
+}
+
+.li-active{
+    background-color: #d0d1d1;
+} 
+
+.li-active i{
+    opacity: 1;
 }

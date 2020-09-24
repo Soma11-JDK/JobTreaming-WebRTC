@@ -116,4 +116,3 @@ dist
 .pnp.*
 
 package-lock.json
-db.js

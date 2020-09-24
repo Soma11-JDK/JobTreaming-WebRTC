@@ -1,16 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
 
 @import "reset.css";
-@import "variables.css";
 
 /* Components */
-@import "components/sidebar-btn.css";
 @import "components/screen.css";
 @import "components/screen-header.css";
 @import "components/screen-footer.css";
-@import "components/sidebar-asides.css";
-@import "components/sidebar-header.css";
-@import "components/sidebar-chatting.css";
+@import "components/sidebar-btn.css";
+@import "components/sidebar-contents.css";
+@import "components/chatting-contents.css";
+@import "components/question-contents.css";
+@import "components/joinusers-contents.css";
+@import "components/chatting-form.css";
+@import "components/question-form.css";
 
 /* Screens */
 @import "screens/join.css";
@@ -21,8 +23,7 @@ body {
 }
 
 .full-screen {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  min-height: 100vh;
   display: flex;
 }
