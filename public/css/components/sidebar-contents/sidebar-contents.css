@@ -1,0 +1,59 @@
+/*---------------------------사이드바 컨텐츠---------------------------*/
+/* 사이드바 컨텐츠 가로넓이 설정 */
+.sidebar-contents{
+    flex-basis: 345px;
+}
+/*---------------------------사이드바 컨텐츠---------------------------*/
+
+
+/*---------------------------컨테이너--------------------------------*/
+/* 모든 컨테이너의 높이, display설정 */
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+/*---------------------------컨테이너--------------------------------*/
+
+/*---------------------------컨테이너 헤더---------------------------*/
+/* 모든 컨테이너 헤더영역의 높이, display, 중앙정렬, 배경색, 패딩 설정 */
+.container-header{
+    flex-basis: 52px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 23px;
+    padding-right: 13px;
+}
+/* 헤더의 글자 */
+.container-header span {
+    font-size: 22px;
+    font-weight: 700;
+}
+/* x아이콘 */
+.container-header i{
+    font-size: 22px;
+    padding: 5px 9px;
+    border-radius: 30px;
+    margin-left: auto;
+}
+/* x아이콘 핸드오버시  */
+.container-header i:hover{
+    background-color:#e6e8e9;
+}
+/*---------------------------컨테이너 헤더---------------------------*/
+
+/*---------------------------컨테이너 컨텐츠---------------------------*/
+/* 컨테이너의 컨텐츠 영역의 크기(flex)와 크기초과시 슬라이드바 생성 설정 */
+.container-contents{
+    overflow-y: auto;
+    background-color: whitesmoke;
+    flex:1;
+}
+/*---------------------------컨테이너 컨텐츠---------------------------*/
+
+
+/* 컨테이너를 숨기기 위한 클래스 */
+.hidden{
+    display: none;
+}

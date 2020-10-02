@@ -1,0 +1,24 @@
+.sidebar-contents
+
+    .chatting-container.container
+        .container-header
+            span chatting
+            i.fas.fa-times.close-btn
+        .container-contents.chatting-contents.chatting-log
+            include contents/chatting-contents
+        include form/chatting-form
+
+    .question-container.container.hidden
+        .container-header
+            span question
+            i.fas.fa-times.close-btn
+        .container-contents.question-contents
+            include contents/question-contents
+        include form/question-form
+
+    .joinusers-container.container.hidden
+        .container-header
+            span joinUsers
+            i.fas.fa-times.close-btn
+        .container-contents.joinusers-contents
+            include contents/joinusers-contents

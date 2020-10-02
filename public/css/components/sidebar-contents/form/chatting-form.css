@@ -1,0 +1,29 @@
+.chatting-form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.chatting-form__column:first-child{
+    width: 10%;
+}
+.chatting-form__column:last-child{
+    width: 90%;
+    position: relative;
+}
+
+.chatting-form__column input{
+    padding: 7px;
+    border-radius: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    width: 80%;
+    margin-right: 10px;
+    font-size: 13px;
+}
+
+.chatting-form__column button{
+    border-radius: 50%;
+    border:1px solid rgba(0, 0, 0, 0.2);
+    padding: 7px 9px;
+}

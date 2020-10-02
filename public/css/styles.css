@@ -3,16 +3,16 @@
 @import "reset.css";
 
 /* Components */
-@import "components/screen.css";
-@import "components/screen-header.css";
-@import "components/screen-footer.css";
-@import "components/sidebar-btn.css";
-@import "components/sidebar-contents.css";
-@import "components/chatting-contents.css";
-@import "components/question-contents.css";
-@import "components/joinusers-contents.css";
-@import "components/chatting-form.css";
-@import "components/question-form.css";
+@import "components/screen/screen.css";
+@import "components/screen/screen-header.css";
+@import "components/screen/screen-footer.css";
+@import "components/sidebar-btn/sidebar-btn.css";
+@import "components/sidebar-contents/sidebar-contents.css";
+@import "components/sidebar-contents/contents/chatting-contents.css";
+@import "components/sidebar-contents/contents/question-contents.css";
+@import "components/sidebar-contents/contents/joinusers-contents.css";
+@import "components/sidebar-contents/form/chatting-form.css";
+@import "components/sidebar-contents/form/question-form.css";
 
 /* Screens */
 @import "screens/join.css";
