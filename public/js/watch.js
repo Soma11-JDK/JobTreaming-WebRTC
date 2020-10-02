@@ -12,7 +12,7 @@ const config = {
     ]
 };
 
-const socket = io.connect('https://192.168.43.130:8080');
+const socket = io.connect('https://3.131.15.28:443');
 const video = document.querySelector("video");
 const enableAudioButton = document.querySelector("#enable-audio");
 
