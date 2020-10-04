@@ -15,7 +15,7 @@ const config = {
 };
 
 //window.location은 현재 도큐먼트의 로케이션에 대한 정보를 가진다. orgin: 프로토콜 + URL의 도메인 + 포트
-const socket = io.connect('https://3.131.15.28:443');
+const socket = io.connect('https://streaming.jobtreaming.com');
 
 //socketid의 description 저장
 socket.on("answer", (id, description) => {
