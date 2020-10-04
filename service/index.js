@@ -1,9 +1,4 @@
-// const registerSignalingEvents = require('./signaling/registerSignalingEvents');
 import { io } from "./io";
-
-// io.on("connection", socket => {
-//     registerSignalingEvents(socket);
-// });
 
 let broadcaster;
 //클라이언트가 서버로 에러메세지를 보내면 콘솔로 출력하기
