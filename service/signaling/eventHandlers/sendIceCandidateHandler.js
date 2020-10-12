@@ -1,7 +1,7 @@
 const { io } = require('../../io');
 
-const sendIceCandidateHandler = (socket, { target, iceCandidate }) => {
-  io.to(target).emit(SEND_ICE_CANDIDATE, { target: socket.id, iceCandidate });
+const sendIceCandidateHandler = (socket, id, iceCandidate) => {
+  socket.to(id).emit("candidate", socket.id, iceCandidate);
 };
 
 module.exports = sendIceCandidateHandler;

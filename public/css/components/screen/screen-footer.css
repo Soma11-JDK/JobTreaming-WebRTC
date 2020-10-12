@@ -21,3 +21,7 @@
 .footer__option:hover{
     background-color: #d5d6d6;
 }
+
+.select{
+    margin-right: 15px;
+}

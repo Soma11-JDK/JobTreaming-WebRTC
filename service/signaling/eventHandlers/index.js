@@ -1,7 +1,8 @@
 const sendIceCandidateHandler = require('./sendIceCandidateHandler');
-const sendDescriptionHandler = require('./sendDescriptionHandler');
+const { sendOfferDescriptionHandler, sendAnswerDescriptionHandler } = require('./sendDescriptionHandler');
 
 module.exports = {
   sendIceCandidateHandler,
-  sendDescriptionHandler,
+  sendOfferDescriptionHandler,
+  sendAnswerDescriptionHandler
 };

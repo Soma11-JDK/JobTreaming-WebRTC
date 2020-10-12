@@ -1,9 +1,12 @@
 const {
-    sendDescriptionHandler,
+    sendOfferDescriptionHandler,
+    sendAnswerDescriptionHandler,
     sendIceCandidateHandler,
 } = require('./eventHandlers');
 
 module.exports = socket => {
-    socket.on('sendDescription', sendDescriptionHandler.bind(null, socket));
-    socket.on('sendIceCandidate', sendIceCandidateHandler.bind(null, socket));
+    //첫번째 인수만 고정
+    socket.on('offer', sendOfferDescriptionHandler.bind(null, socket));
+    socket.on('answer', sendAnswerDescriptionHandler.bind(null, socket));
+    socket.on('candidate', sendIceCandidateHandler.bind(null, socket));
 };

@@ -1,9 +1,11 @@
 extends layouts/streaming
 
 block links
+    script(src="js/event.js")
     script(src="js/moving.js")
     script(src="/socket.io/socket.io.js")
-    script(src="js/watch.js")
+    script(src="js/viewer.js")
+    script(src="js/chatting.js")
 
 block footer
     button(id="enable-audio") Enable audio 

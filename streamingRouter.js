@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"; //for Routing
 import { roomInfo } from './db';
 
 const streamingRouter = express.Router();
@@ -8,11 +8,12 @@ const postStreaming = (req, res) => {
     console.log(req.body.id, req.body.room);
     let id = req.body.id;
     let room = req.body.room;
+
     //check id, room
     if (isStreamer(id, room)) {
         res.render("streamer", { userName: id, roomName: room });
-    } else if (isViewers(id, room)) {
-        res.render("viewers", { userName: id, roomName: room });
+    } else if (isViewer(id, room)) {
+        res.render("viewer", { userName: id, roomName: room });
     } else {
         console.log("incorrect");
         res.render("join");
@@ -22,8 +23,8 @@ const postStreaming = (req, res) => {
 
 }
 
-streamingRouter.get('/', getStreaming);
-streamingRouter.post('/', postStreaming);
+streamingRouter.get("/", getStreaming);
+streamingRouter.post("/", postStreaming);
 
 export default streamingRouter;
 
@@ -39,7 +40,7 @@ function isStreamer(id, room) {
     return false;
 }
 
-function isViewers(id, room) {
+function isViewer(id, room) {
     for (let i = 0; i < roomInfo.length; i++) {
         if (room == roomInfo[i].roomName) {
             for (let j = 0; j < roomInfo[i].membersId.length; j++) {

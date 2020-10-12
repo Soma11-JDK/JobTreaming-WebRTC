@@ -1,7 +1,12 @@
 const { io } = require('../../io');
+import EVENT from "../../event";
 
-const sendDescriptionHandler = (socket, { target, description }) => {
-  io.to(target).emit(SEND_DESCRIPTION, { target: socket.id, description });
-};
+const sendOfferDescriptionHandler = (socket, id, description) => {
+  socket.to(id).emit(EVENT.OFFER, socket.id, description);
+}
 
-module.exports = sendDescriptionHandler;
+const sendAnswerDescriptionHandler = (socket, id, description) => {
+  socket.to(id).emit(EVENT.ANSWER, socket.id, description);
+}
+
+module.exports = { sendOfferDescriptionHandler, sendAnswerDescriptionHandler };

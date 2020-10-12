@@ -1,10 +1,12 @@
 extends layouts/streaming
 
 block links
+    script(src="js/event.js")
     script(src="js/moving.js")
     script(src="/socket.io/socket.io.js")
-    script(src="js/broadcast.js")
-
+    script(src="js/streamer.js")
+    script(src="js/chatting.js")
+    
 block footer
     section.select
         label Audio source:

@@ -16,9 +16,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-app.use('/streaming', streamingRouter);
-app.use((req, res) => { res.redirect('/streaming'); });
+app.use('/', streamingRouter);
+app.use((req, res) => { res.redirect('/'); });
 
+//app.service == socket.io
 app.service = service;
 
 export default app; 

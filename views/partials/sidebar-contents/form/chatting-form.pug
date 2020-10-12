@@ -1,7 +1,6 @@
-form.chatting-form
-    .chatting-form__column
-        i.far.fa-plus-square.fa-lg
-    .chatting-form__column
-        input(type="text",placeholder="Write a message...")
-        button
-            i.fas.fa-arrow-up
+div.chatting-form
+    label(for="fileSelect").fas.fa-folder-plus.fa-lg
+    input(multiple="multiple" type="file" id="fileSelect").chatting-form__file
+    input(type="text",placeholder="Write a message...").chatting-form__input
+    button(type="button").chatting-form__button
+        i.fas.fa-arrow-up
