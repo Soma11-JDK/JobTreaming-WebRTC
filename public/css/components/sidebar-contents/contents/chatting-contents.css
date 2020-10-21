@@ -34,13 +34,6 @@
     margin: 7px 0px;
 }
 
-.message-row img {
-width: 50px;
-height: 50px;
-border-radius: 50%;
-margin-right: 10px;
-}
-
 .message__author {
 margin-bottom: 5px;
 display: block;
@@ -58,6 +51,31 @@ font-size: 13px;
 border-radius: 15px;
 border-top-left-radius: 0px;
 margin-right: 5px;
+word-break: break-word;
+}
+.message__image{
+    width: 200px;
+    height: auto;
+}
+
+.message__document{
+    display:flex;
+}
+
+.document__text{
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    font-size: 10px;
+}
+
+.document__text__name{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.document__icon{
+    font-size: 25px;
 }
 
 .streamer-bubble{

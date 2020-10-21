@@ -16,6 +16,7 @@ const roomName = document.querySelector(".roomName").textContent;
 // };
 
 const socket = io.connect('/main');
+var uploader = new SocketIOFileClient(socket);
 
 socket.emit(EVENT.ROOMJOIN, { userName, roomName });
 

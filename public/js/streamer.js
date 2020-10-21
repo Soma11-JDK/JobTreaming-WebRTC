@@ -20,6 +20,7 @@ const roomName = document.querySelector(".roomName").textContent;
 // };
 
 const socket = io.connect('/main');
+var uploader = new SocketIOFileClient(socket);
 
 //room에 join
 socket.emit(EVENT.ROOMJOIN, { userName, roomName });
