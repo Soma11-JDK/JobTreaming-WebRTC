@@ -1,7 +1,9 @@
-const { io } = require('../../io');
+import { main } from "../../io";
+import EVENT from "../../event";
 
-const sendIceCandidateHandler = (socket, id, iceCandidate) => {
-  socket.to(id).emit("candidate", socket.id, iceCandidate);
+const sendIceCandidateHandler = (socket, data) => {
+  console.log('candidate');
+  socket.to(data.id).emit(EVENT.CANDIDATE, { id: socket.id, candidate: data.candidate });
 };
 
 module.exports = sendIceCandidateHandler;

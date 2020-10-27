@@ -1,6 +1,6 @@
 const EVENT = {
     CONNECTION: 'connection',
-    ROOMJOIN: 'roomjoin',
+    JOINROOM: 'joinRoom',
     STREAMER_READY: 'streamerReady',
     VIEWER_READY: 'viewerReady',
     OFFER: 'offer',
@@ -21,6 +21,7 @@ const EVENT = {
     LIKE: 'like',
     JOINUSERS: 'joinusers',
     DISCONNECT: 'disconnect',
+    DISCONNECTPEER: 'disconnectPeer',
     ERROR: 'error',
     NOTICE: 'notice'
 };

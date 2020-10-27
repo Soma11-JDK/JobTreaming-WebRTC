@@ -1,8 +1,11 @@
-const sendIceCandidateHandler = require('./sendIceCandidateHandler');
-const { sendOfferDescriptionHandler, sendAnswerDescriptionHandler } = require('./sendDescriptionHandler');
+import sendIceCandidateHandler from "./sendIceCandidateHandler";
+import { sendOfferDescriptionHandler, sendAnswerDescriptionHandler } from "./sendDescriptionHandler";
+import { readyStreamerHandler, readyViewerHandler } from "./readyHandler";
 
 module.exports = {
   sendIceCandidateHandler,
   sendOfferDescriptionHandler,
-  sendAnswerDescriptionHandler
+  sendAnswerDescriptionHandler,
+  readyStreamerHandler,
+  readyViewerHandler
 };
