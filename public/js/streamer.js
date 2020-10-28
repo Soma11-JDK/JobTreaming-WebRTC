@@ -1,7 +1,8 @@
+
 //roomName,userName을 변경하지 못하도록 다른방법으로 가져올수있는지 조사해보기
 const userName = document.querySelector(".userName").textContent;
 const roomName = document.querySelector(".roomName").textContent;
-const videoElement = document.querySelector("video");
+const videoElement = document.querySelector(".screen-video");
 const audioSelect = document.querySelector("select#audioSource");
 const videoSelect = document.querySelector("select#videoSource");
 const peerConnections = {};
@@ -85,13 +86,52 @@ window.onunload = window.onbeforeunload = () => {
     socket.close();
 };
 
+const videoSelectWrap = document.querySelector(".videoSelectWrap");
+const videoIcon = document.querySelector(".videoIcon");
+videoSelectWrap.addEventListener("click", (e) => {
+    videoIcon.classList.toggle("fa-video");
+    videoIcon.classList.toggle("fa-video-slash");
+    videoSelect.classList.toggle("hidden");
+    window.stream.getVideoTracks()[0].enabled = !(window.stream.getVideoTracks()[0].enabled);
+});
+
+const audioSelectWrap = document.querySelector(".audioSelectWrap");
+const audioIcon = document.querySelector(".audioIcon");
+audioSelectWrap.addEventListener("click", (e) => {
+    audioIcon.classList.toggle("fa-microphone");
+    audioIcon.classList.toggle("fa-microphone-slash");
+    audioSelect.classList.toggle("hidden");
+    window.stream.getAudioTracks()[0].enabled = !(window.stream.getAudioTracks()[0].enabled);
+});
+
+const scrnSharWrap = document.querySelector(".scrnSharWrap");
+const scrnIcon = document.querySelector(".scrnIcon");
+scrnSharWrap.addEventListener("click", (e) => {
+
+    navigator.mediaDevices.getDisplayMedia({ video: true }).then((stream) => {
+        videoElement.srcObject = stream;
+    });
+
+    if (scrnIcon.innerHTML == "") {
+        scrnIcon.innerHTML = '<i class="fas fa-slash"></i><i class="fas fa-slash slh"></i>';
+    } else {
+        scrnIcon.innerHTML = "";
+    }
+
+
+})
+
+
 //핸들러 등록
 audioSelect.onchange = getStream;
 videoSelect.onchange = getStream;
+navigator.mediaDevices.ondevicechange = streamInit;
 
-//처음한번만 select 옵션등록.
-getStream().then(getDevices).then(gotDevices);
+streamInit();
 
+function streamInit() {
+    getStream().then(getDevices).then(gotDevices);
+}
 
 function getDevices() {
     //이 메서드는 사용(또는 접근)이 가능한 미디어 입력장치나 출력장치들의 리스트를 가져온다.
@@ -101,6 +141,8 @@ function getDevices() {
 
 //select의 옵션 설정하기
 function gotDevices(deviceInfos) {
+    audioSelect.options.length = 0;
+    videoSelect.options.length = 0;
     window.deviceInfos = deviceInfos;
     for (const deviceInfo of deviceInfos) {
         const option = document.createElement("option");
@@ -134,6 +176,7 @@ function getStream() {
     };
     console.log(Boolean(constraints.audio), Boolean(constraints.video));
     //여러개의 MediaStreamTrack으로 구성되는 로컬 MediaStream 객체 생성.
+    // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
     return navigator.mediaDevices
         .getUserMedia(constraints)
         .then(gotStream)

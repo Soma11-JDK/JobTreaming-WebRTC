@@ -1,5 +1,7 @@
+
 const userName = document.querySelector(".userName").textContent;
 const roomName = document.querySelector(".roomName").textContent;
+const videoElement = document.querySelector(".screen-video");
 const video = document.querySelector("video");
 const enableAudioButton = document.querySelector("#enable-audio");
 

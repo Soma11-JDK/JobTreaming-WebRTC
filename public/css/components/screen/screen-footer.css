@@ -1,27 +1,67 @@
 .screen-footer{
     background-color: #5470ff;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     flex-basis: 52px;
     align-items: center;
 }
 
 .footer__option{
     background-color: white;
-    margin: 5px;
-    margin-right: 13px;
+    margin: 5px 13px;
     border-radius: 17px;
     font-size: 15px;
-    width: 35px;
     height: 35px;
-    text-align:center;
+    text-align: center;
     line-height: 35px;
+    display: flex;
+}
+.iwrap{
+    width: 35px;
+    height: 34px;
+    border-radius: 17px;
+    background-color: white;
+    border: solid 1px gray;
 }
 
-.footer__option:hover{
+.footer__option select{
+    border: none;
+    border-radius: 17px;
+    outline: none;
+    width: 0px;
+    transition: width 0.3s ease-in-out;
+}
+
+.iwrap:hover{
     background-color: #d5d6d6;
 }
 
-.select{
-    margin-right: 15px;
+.scrnIcon{
+    position: relative;
+}
+
+.fa-slash{
+    position: absolute;
+    left: -1px;
+    top: -1px;
+}
+.slh{
+    color: white;
+    top: 1px;
+}
+
+.videoSelectWrap:hover ~#videoSource{
+    width: 300px;
+}
+#videoSource:hover{
+    width: 300px;
+}
+
+
+.audioSelectWrap:hover ~#audioSource{
+    width: 300px;
+}
+
+#audioSource:hover{
+    width: 300px;
 }

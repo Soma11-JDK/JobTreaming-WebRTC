@@ -1,11 +1,20 @@
 .screen-header
     .header__logo
         img.logo__img(src="img/logo.png")
-    .header__roomname
+    .header__roomname.hidden
         span RoomName :
         span.roomName #{roomName}
-    .header__streamername
+    .header__streamername.hidden
         span UserName : 
         span.userName #{userName}
+
+    .streamingTitle
+        .titleTop
+            span 실리콘벨리 개발자가 알려주는 프론트엔드 취업가이드
+        .titleButtom
+            span.streamerName 제임스 오
+            i.far.fa-clock
+            span.titleTime 18:00 - 19:30 (90분)
+
     .haeder__exit
         botton.exit__button Exit

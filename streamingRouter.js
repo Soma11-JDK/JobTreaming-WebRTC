@@ -11,9 +11,9 @@ const postStreaming = (req, res) => {
 
     //check id, room
     if (isStreamer(id, room)) {
-        res.render("streamer", { userName: id, roomName: room });
+        res.render("streamer", { userName: id, roomName: room, streamer: true });
     } else if (isViewer(id, room)) {
-        res.render("viewer", { userName: id, roomName: room });
+        res.render("viewer", { userName: id, roomName: room, streamer: false });
     } else {
         console.log("incorrect");
         res.render("join");

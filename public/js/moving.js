@@ -29,7 +29,7 @@ window.addEventListener("load", function () {
         if (!open) {
             sidebarContents.classList.remove("hidden")
             open = true;
-            chattingContainer.classList.remove("hiddencl")
+            chattingContainer.classList.remove("hidden")
             questionContainer.classList.add("hidden")
             joinusersContainer.classList.add("hidden")
             //버튼
