@@ -1,5 +1,8 @@
 const io = require('socket.io')();
+const SocketIOFile = require('socket.io-file');
 
-const { rooms } = io.sockets.adapter;
+//connect namespace
+const main = io.of('/main');
+const rehearsal = io.of('/rehearsal');
 
-module.exports = { io, rooms };
+module.exports = { io, main, rehearsal, SocketIOFile };

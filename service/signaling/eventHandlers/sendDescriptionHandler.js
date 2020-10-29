@@ -1,7 +1,18 @@
-const { io } = require('../../io');
+import { main } from "../../io";
+import EVENT from "../../event";
 
-const sendDescriptionHandler = (socket, { target, description }) => {
-  io.to(target).emit(SEND_DESCRIPTION, { target: socket.id, description });
-};
+const sendOfferDescriptionHandler = (socket, data) => {
+  console.log('offer');
+  const { streamerDescription } = data;
+  const { viewerId } = data;
+  socket.to(viewerId).emit(EVENT.OFFER, { streamerId: socket.id, streamerDescription });
+}
 
-module.exports = sendDescriptionHandler;
+const sendAnswerDescriptionHandler = (socket, data) => {
+  console.log('answer');
+  const { viewerDescription } = data;
+  const { streamerId } = data;
+  socket.to(streamerId).emit(EVENT.ANSWER, { viewerId: socket.id, viewerDescription });
+}
+
+module.exports = { sendOfferDescriptionHandler, sendAnswerDescriptionHandler };

@@ -1,0 +1,78 @@
+.question-box{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    background-color: #4253FC;
+    color: #E8E9E8;
+    border-radius: 15px;
+}
+
+.question-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 13px;
+}
+
+.question-title-wirter{
+    display: flex;
+    flex-direction: column;
+}
+
+.question-love{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.question-love i{
+    font-size: 25px;
+    color: hotpink;
+}
+
+.question-love span{
+    font-size: 13px;
+}
+
+.question-title{
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.question-writer{
+    font-size: 10px;
+    margin-top: 7px;
+}
+
+.question-body{
+    margin: 0px 13px;
+    background: #3645C1;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.question-filelist{
+    margin: 10px 13px 13px 13px;
+}
+
+.question-filelist > span{
+    font-size: 14px;
+}
+
+.question-img{
+    margin: 7px 0px
+}
+
+.question-file{
+    padding: 7px;
+    background: #3645C1;
+    border-radius: 10px;
+    justify-content: space-between;
+    margin-top: 10px;
+    border: solid 2px;
+}
+
+.question-image{
+    margin: 10px;
+}

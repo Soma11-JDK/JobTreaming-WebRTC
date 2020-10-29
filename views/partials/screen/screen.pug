@@ -1,6 +1,10 @@
 .screen
     include screen-header
 
-    video.screen-video(controls playsinline autoplay muted)
+    include videoPlayer
 
-    include screen-footer
+    if streamer == true
+        include streamer-footer
+    else
+        include viewer-footer
+        

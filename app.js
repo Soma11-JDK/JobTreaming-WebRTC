@@ -16,9 +16,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-app.use('/streaming', streamingRouter);
-app.use((req, res) => { res.redirect('/streaming'); });
 
+app.get('/socket.io.js', (req, res, next) => {
+    return res.sendFile(__dirname + '/node_modules/socket.io-client/dist/socket.io.js');
+});
+app.get('/socket.io-file-client.js', (req, res, next) => {
+    return res.sendFile(__dirname + '/node_modules/socket.io-file-client/socket.io-file-client.js');
+});
+app.use('/', streamingRouter);
+app.use((req, res) => { res.redirect('/'); });
+
+
+
+//app.service == socket.io
 app.service = service;
 
 export default app; 

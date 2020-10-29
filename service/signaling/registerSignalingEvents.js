@@ -1,9 +1,16 @@
-const {
-    sendDescriptionHandler,
+import EVENT from "../event";
+import {
+    sendOfferDescriptionHandler,
+    sendAnswerDescriptionHandler,
     sendIceCandidateHandler,
-} = require('./eventHandlers');
+    readyStreamerHandler,
+    readyViewerHandler
+} from "./eventHandlers";
 
 module.exports = socket => {
-    socket.on('sendDescription', sendDescriptionHandler.bind(null, socket));
-    socket.on('sendIceCandidate', sendIceCandidateHandler.bind(null, socket));
+    socket.on(EVENT.OFFER, sendOfferDescriptionHandler.bind(null, socket));
+    socket.on(EVENT.ANSWER, sendAnswerDescriptionHandler.bind(null, socket));
+    socket.on(EVENT.CANDIDATE, sendIceCandidateHandler.bind(null, socket));
+    socket.on(EVENT.STREAMER_READY, readyStreamerHandler.bind(null, socket));
+    socket.on(EVENT.VIEWER_READY, readyViewerHandler.bind(null, socket));
 };
