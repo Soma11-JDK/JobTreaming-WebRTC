@@ -23,6 +23,10 @@ app.get('/socket.io.js', (req, res, next) => {
 app.get('/socket.io-file-client.js', (req, res, next) => {
     return res.sendFile(__dirname + '/node_modules/socket.io-file-client/socket.io-file-client.js');
 });
+app.get('/socket.io.js.map', (req, res) => {
+    return res.sendFile(__dirname + '/node_modules/socket.io-client/dist/socket.io.js.map');
+});
+
 app.use('/', streamingRouter);
 app.use((req, res) => { res.redirect('/'); });
 
