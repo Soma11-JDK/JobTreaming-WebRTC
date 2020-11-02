@@ -1,5 +1,9 @@
 import http from "http";
 import app from "./app";
+import "./mongodb";
+import "./models/Comment";
+import "./models/Question";
+import "./models/QuestionComment";
 
 const PORT = 80;
 const handleListening = () => { console.log(`socket IO server listening on port ${PORT}`); }

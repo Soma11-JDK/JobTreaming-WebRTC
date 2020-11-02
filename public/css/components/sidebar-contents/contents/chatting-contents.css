@@ -37,6 +37,7 @@
 .message__author {
 margin-bottom: 5px;
 display: block;
+font-weight: 700;
 }
 
 .message__info {
@@ -85,7 +86,7 @@ word-break: break-word;
 .message__time,
 .message__author {
 opacity: 0.9;
-font-size: 12.5px;
+font-size: 13px;
 }
 
 .message-row--own {

@@ -1,78 +1,106 @@
-.question-box{
+.questionBox{
+    margin: 10px;
+    padding: 10px 0px;
     display: flex;
     flex-direction: column;
-    margin: 20px;
-    background-color: #4253FC;
-    color: #E8E9E8;
-    border-radius: 15px;
-}
-
-.question-header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: 13px;
-}
-
-.question-title-wirter{
-    display: flex;
-    flex-direction: column;
-}
-
-.question-love{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.question-love i{
-    font-size: 25px;
-    color: hotpink;
-}
-
-.question-love span{
-    font-size: 13px;
-}
-
-.question-title{
-    font-size: 19px;
-    font-weight: bold;
-}
-
-.question-writer{
-    font-size: 10px;
-    margin-top: 7px;
-}
-
-.question-body{
-    margin: 0px 13px;
-    background: #3645C1;
-    border-radius: 15px;
-    padding: 10px;
-}
-
-.question-filelist{
-    margin: 10px 13px 13px 13px;
-}
-
-.question-filelist > span{
+    border-bottom: solid 1px #c1c1c1;
     font-size: 14px;
 }
 
-.question-img{
-    margin: 7px 0px
-}
-
-.question-file{
-    padding: 7px;
-    background: #3645C1;
-    border-radius: 10px;
+.questionHeader{
+    display: flex;
     justify-content: space-between;
-    margin-top: 10px;
-    border: solid 2px;
 }
 
-.question-image{
-    margin: 10px;
+.questionWriter{
+    font-weight: 700;
+}
+
+.questionBody{
+    margin: 10px 0px;
+}
+
+.questionText{
+    word-break: break-word;
+}
+.questionFooter{
+    display: flex;
+    flex-direction: row;
+}
+
+.questionLove{
+    padding: 5px 10px;
+    background-color: #d7d7d7;
+    border-radius: 7px;
+    margin-right: 10px;
+    font-size: 13px;
+}
+
+.questionLove i {
+    padding-right: 5px;
+    color: white;
+}
+
+.questionComments{
+    padding: 5px 10px;
+    background-color: #3a4fad;
+    border-radius: 7px;
+    margin-right: 10px;
+    font-size: 13px;
+}
+
+.questionComments i{
+    padding-right: 5px;
+    color: white;
+}
+
+.questionComments span{
+    color: white;
+}
+
+.inputComments{
+    margin-top: 10px;
+}
+
+.openComments{
+    margin: 10px 0px;
+    background-color: #99aafc;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+.closeBtn{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.commentsText{
+    display: block;
+    margin: 8px 5px;
+}
+
+.commentsWriter{
+    margin-left: 10px;
+    color: #4d4d4d;
+    font-weight: 700;
+}
+
+.inputCommentsBtn{
+    position: relative;
+    display: inline;
+}
+
+.inputCommentsBtn input{
+    border-radius: 20px;
+    border: solid 1px #4d4d4d;
+    margin-left: 10px;
+    width: 250px;
+    height: 20px;
+}
+
+.inputCommentsBtn i{
+    position: absolute;
+    left: 242px;
+    top: 2px;
 }

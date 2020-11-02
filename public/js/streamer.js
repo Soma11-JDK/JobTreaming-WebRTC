@@ -1,4 +1,3 @@
-
 //roomName,userName을 변경하지 못하도록 다른방법으로 가져올수있는지 조사해보기
 const userName = document.querySelector(".userName").textContent;
 const roomName = document.querySelector(".roomName").textContent;
@@ -19,17 +18,22 @@ const config = {
     ]
 };
 
-//서버에 소켓연결
+//1. 서버에 소켓연결
 const socket = io.connect('/main');
 var uploader = new SocketIOFileClient(socket);
+//윈도우가 닫히면 소켓닫기
+window.onunload = window.onbeforeunload = () => {
+    socket.close();
+};
 
-//room에 join
+//2. room에 join
 socket.emit(EVENT.JOINROOM, { userName, roomName });
+
+//3. 이벤트 리스너
 socket.on('join-success', () => {
     console.log('join-suceess');
 })
 
-//새로운 viewer가 들어옴
 socket.on(EVENT.VIEWER_READY, viewerId => {
     //새로운 viewer의 PeerConnection를 만듦
     const peerConnection = new RTCPeerConnection(config);
@@ -60,7 +64,6 @@ socket.on(EVENT.VIEWER_READY, viewerId => {
         });
 });
 
-//socketid의 description 저장
 socket.on(EVENT.ANSWER, (data) => {
     console.log('received answer');
     const { viewerDescription } = data;
@@ -81,20 +84,24 @@ socket.on(EVENT.DISCONNECTPEER, (id) => {
     }
 });
 
-//윈도우가 닫히면 소켓닫기
-window.onunload = window.onbeforeunload = () => {
-    socket.close();
-};
+//4.
+streamInit();
+navigator.mediaDevices.ondevicechange = streamInit;
+audioSelect.onchange = getStream;
+videoSelect.onchange = getStream;
 
+//video enabled
 const videoSelectWrap = document.querySelector(".videoSelectWrap");
 const videoIcon = document.querySelector(".videoIcon");
 videoSelectWrap.addEventListener("click", (e) => {
     videoIcon.classList.toggle("fa-video");
     videoIcon.classList.toggle("fa-video-slash");
     videoSelect.classList.toggle("hidden");
+    //! 토글
     window.stream.getVideoTracks()[0].enabled = !(window.stream.getVideoTracks()[0].enabled);
 });
 
+//audio enabled
 const audioSelectWrap = document.querySelector(".audioSelectWrap");
 const audioIcon = document.querySelector(".audioIcon");
 audioSelectWrap.addEventListener("click", (e) => {
@@ -104,11 +111,14 @@ audioSelectWrap.addEventListener("click", (e) => {
     window.stream.getAudioTracks()[0].enabled = !(window.stream.getAudioTracks()[0].enabled);
 });
 
+//share scrn
 const scrnSharWrap = document.querySelector(".scrnSharWrap");
 const scrnIcon = document.querySelector(".scrnIcon");
 scrnSharWrap.addEventListener("click", (e) => {
 
     navigator.mediaDevices.getDisplayMedia({ video: true }).then((stream) => {
+        stream.getVideoTracks
+        window.stream = stream;
         videoElement.srcObject = stream;
     });
 
@@ -118,19 +128,15 @@ scrnSharWrap.addEventListener("click", (e) => {
         scrnIcon.innerHTML = "";
     }
 
-
 })
 
 
-//핸들러 등록
-audioSelect.onchange = getStream;
-videoSelect.onchange = getStream;
-navigator.mediaDevices.ondevicechange = streamInit;
-
-streamInit();
 
 function streamInit() {
-    getStream().then(getDevices).then(gotDevices);
+    //리스트 셋팅하기
+    getDevices().then(gotDevices);
+    //선택된 값으로 미디어스트림생성, 미디어등록 준비완료
+    getStream();
 }
 
 function getDevices() {
@@ -170,11 +176,11 @@ function getStream() {
     //value가 undefined일 때도 audio와 video의 boolean은 true이므로 기본적인 audio와 video가 input으로 지정됩니다.
     const audioSource = audioSelect.value;
     const videoSource = videoSelect.value;
+    console.log(audioSource, videoSource);
     const constraints = {
         audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
         video: { deviceId: videoSource ? { exact: videoSource } : undefined }
     };
-    console.log(Boolean(constraints.audio), Boolean(constraints.video));
     //여러개의 MediaStreamTrack으로 구성되는 로컬 MediaStream 객체 생성.
     // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
     return navigator.mediaDevices
@@ -186,10 +192,7 @@ function getStream() {
 function gotStream(stream) {
     //window.stream에 로컬 MediaStream객체 저장.
     window.stream = stream;
-    console.log(stream);
-    console.log(stream.getAudioTracks());
-    console.log(stream.getVideoTracks());
-    //로컬 MediaStream의 video와 audio를 selected한다.
+    //로컬 MediaStream의 video와 audio를 selected한다. 제일 처음을 위해서..
     audioSelect.selectedIndex = [...audioSelect.options].findIndex(
         option => option.text === stream.getAudioTracks()[0].label
     );

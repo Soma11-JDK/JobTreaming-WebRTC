@@ -71,7 +71,7 @@ function makeChat(sender, time, elm) {
     chattingContents.appendChild(div);
     chattingContents.scrollTop = chattingContents.scrollHeight;
 
-    return Bubble;
+    //return Bubble;
 }
 
 
@@ -129,13 +129,9 @@ socket.on(EVENT.CHAT_IMAGE, (data) => {
     makeChat(data.userName, data.time, a);
 });
 
-
-
-
 function chattingSubmitHandler() {
     if (chattingInput.value) {
-        let now = new Date();
-        const time = now.getHours() + ":" + now.getMinutes();
+        const time = Date.now;
         const text = chattingInput.value;
         socket.emit(EVENT.CHAT, { userName, roomName, text, time });
         chattingInput.value = '';
@@ -144,7 +140,6 @@ function chattingSubmitHandler() {
 
 chattingInput.addEventListener('keypress', (e) => { if (e.which == 13) { chattingSubmitHandler(); } });
 chattingButton.addEventListener('click', chattingSubmitHandler);
-
 
 fileSelect.addEventListener('change', function (ev) {
     ev.preventDefault();
