@@ -1,7 +1,10 @@
 import { chatHandler } from "./chattingHandler";
-import { questionHandler } from "./questionHandler";
+import { questionHandler, likeUpHandler, likeDownHandler, questionCommentHandler } from "./questionHandler";
 
 module.exports = {
     chatHandler,
-    questionHandler
+    questionHandler,
+    likeUpHandler,
+    likeDownHandler,
+    questionCommentHandler
 };

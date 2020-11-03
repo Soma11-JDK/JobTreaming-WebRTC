@@ -73,6 +73,7 @@ word-break: break-word;
 .document__text__name{
     font-size: 13px;
     font-weight: bold;
+    margin-bottom: 3px;
 }
 
 .document__icon{

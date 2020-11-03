@@ -1,4 +1,3 @@
-
 const userName = document.querySelector(".userName").textContent;
 const roomName = document.querySelector(".roomName").textContent;
 const videoElement = document.querySelector(".screen-video");

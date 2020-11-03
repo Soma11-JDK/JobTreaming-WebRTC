@@ -28,7 +28,7 @@
     flex-direction: row;
 }
 
-.questionLove{
+.questionLike{
     padding: 5px 10px;
     background-color: #d7d7d7;
     border-radius: 7px;
@@ -36,36 +36,35 @@
     font-size: 13px;
 }
 
-.questionLove i {
+.questionLike i {
     padding-right: 5px;
     color: white;
 }
 
 .questionComments{
     padding: 5px 10px;
-    background-color: #3a4fad;
     border-radius: 7px;
     margin-right: 10px;
     font-size: 13px;
+    background-color: #d7d7d7;
 }
 
 .questionComments i{
-    padding-right: 5px;
-    color: white;
+    padding-right: 5px;   
+    color: white; 
 }
 
-.questionComments span{
-    color: white;
-}
 
 .inputComments{
     margin-top: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .openComments{
     margin: 10px 0px;
     background-color: #99aafc;
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
     font-size: 13px;
 }
@@ -73,34 +72,43 @@
 .closeBtn{
     display: flex;
     flex-direction: row-reverse;
+    margin-bottom: 10px;
 }
 
 .commentsText{
     display: block;
     margin: 8px 5px;
+    font-weight: 700;
+    word-break: break-word;
 }
 
 .commentsWriter{
     margin-left: 10px;
-    color: #4d4d4d;
     font-weight: 700;
+    margin-right: 204px;
 }
 
 .inputCommentsBtn{
     position: relative;
-    display: inline;
+    display: flex;
+    width: 250px;
+    height: 20px;
+    background-color: white;
+    border-radius: 20px;
+    margin-left: 10px;
+    align-items: center;
+    border: solid 1px rgb(75, 75, 75);
 }
 
 .inputCommentsBtn input{
     border-radius: 20px;
-    border: solid 1px #4d4d4d;
-    margin-left: 10px;
-    width: 250px;
-    height: 20px;
+    width: 220px;
+    border: none;
+    background-color: white;
+    margin-right: 4px;
 }
 
-.inputCommentsBtn i{
-    position: absolute;
-    left: 242px;
-    top: 2px;
+.questionBG{
+    background-color: #3a4fad;
+    color: white;
 }
