@@ -2,7 +2,7 @@ const userName = document.querySelector(".userName").textContent;
 const roomName = document.querySelector(".roomName").textContent;
 const videoElement = document.querySelector(".screen-video");
 const video = document.querySelector("video");
-const enableAudioButton = document.querySelector("#enable-audio");
+var startTime;
 
 let peerConnection;
 const config = {
@@ -26,8 +26,6 @@ socket.emit(EVENT.JOINROOM, { userName, roomName });
 socket.on('join-success', () => {
     socket.emit(EVENT.VIEWER_READY, roomName);
 });
-
-enableAudioButton.addEventListener("click", enableAudio)
 
 socket.on(EVENT.OFFER, (data) => {
     console.log('receive offer');
@@ -75,7 +73,3 @@ socket.on(EVENT.STREAMER_READY, () => {
 window.onunload = window.onbeforeunload = () => {
     socket.close();
 };
-
-function enableAudio() {
-    video.muted = false;
-}

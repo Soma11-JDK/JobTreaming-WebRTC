@@ -75,8 +75,11 @@ const formatDate = seconds => {
     return `${hours}:${minutes}:${totalSeconds}`;
 };
 
-function getCurrentTime() {
-    playTime.innerHTML = formatDate(Math.floor(videoElement.currentTime));
+var currentTime = 0;
+function printTime() {
+    currentTime++;
+    playTime.innerHTML = formatDate(currentTime);
+    console.log(currentTime);
 }
 
 function handleDrag(event) {
@@ -98,7 +101,7 @@ function init() {
     playBtn.addEventListener("click", handlePlayClick);
     volumeBtn.addEventListener("click", handleVolumeClick);
     fullScrnBtn.addEventListener("click", goFullScreen);
-    videoElement.addEventListener("loadedmetadata", () => { setInterval(getCurrentTime, 1000); });
+    videoElement.addEventListener("loadedmetadata", () => { setInterval(printTime, 1000); });
     volumeRange.addEventListener("input", handleDrag);
 }
 
