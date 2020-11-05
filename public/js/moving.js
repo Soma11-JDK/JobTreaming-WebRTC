@@ -6,8 +6,8 @@ window.addEventListener("load", function () {
     const chattingContainer = document.querySelector(".chatting-container")
     const openQuestion = document.querySelector(".open-question")
     const questionContainer = document.querySelector(".question-container")
-    const openJoinusers = document.querySelector(".open-joinusers")
-    const joinusersContainer = document.querySelector(".joinusers-container")
+    const openFiles = document.querySelector(".open-Files")
+    const FilesContainer = document.querySelector(".Files-container")
 
     let ctn = 0;
     let open = true;
@@ -20,7 +20,7 @@ window.addEventListener("load", function () {
             //버튼
             openChatting.classList.remove("li-active")
             openQuestion.classList.remove("li-active")
-            openJoinusers.classList.remove("li-active")
+            openFiles.classList.remove("li-active")
         })
     }
 
@@ -31,11 +31,11 @@ window.addEventListener("load", function () {
             open = true;
             chattingContainer.classList.remove("hidden")
             questionContainer.classList.add("hidden")
-            joinusersContainer.classList.add("hidden")
+            FilesContainer.classList.add("hidden")
             //버튼
             openChatting.classList.add("li-active")
             openQuestion.classList.remove("li-active")
-            openJoinusers.classList.remove("li-active")
+            openFiles.classList.remove("li-active")
             ctn = 0;
         } else {//열려있고 
             if (ctn == 0) {//또클릭
@@ -43,15 +43,15 @@ window.addEventListener("load", function () {
                 open = false;
                 openChatting.classList.remove("li-active")
                 openQuestion.classList.remove("li-active")
-                openJoinusers.classList.remove("li-active")
+                openFiles.classList.remove("li-active")
             } else {
                 chattingContainer.classList.remove("hidden")
                 questionContainer.classList.add("hidden")
-                joinusersContainer.classList.add("hidden")
+                FilesContainer.classList.add("hidden")
                 ctn = 0;
                 openChatting.classList.add("li-active")
                 openQuestion.classList.remove("li-active")
-                openJoinusers.classList.remove("li-active")
+                openFiles.classList.remove("li-active")
             }
         }
     })
@@ -64,31 +64,31 @@ window.addEventListener("load", function () {
             open = true;
             chattingContainer.classList.add("hidden")
             questionContainer.classList.remove("hidden")
-            joinusersContainer.classList.add("hidden")
+            FilesContainer.classList.add("hidden")
             ctn = 1;
             openChatting.classList.remove("li-active")
             openQuestion.classList.add("li-active")
-            openJoinusers.classList.remove("li-active")
+            openFiles.classList.remove("li-active")
         } else {
             if (ctn == 1) {
                 sidebarContents.classList.add("hidden")
                 open = false;
                 openChatting.classList.remove("li-active")
                 openQuestion.classList.remove("li-active")
-                openJoinusers.classList.remove("li-active")
+                openFiles.classList.remove("li-active")
             } else {
                 chattingContainer.classList.add("hidden")
                 questionContainer.classList.remove("hidden")
-                joinusersContainer.classList.add("hidden")
+                FilesContainer.classList.add("hidden")
                 ctn = 1;
                 openChatting.classList.remove("li-active")
                 openQuestion.classList.add("li-active")
-                openJoinusers.classList.remove("li-active")
+                openFiles.classList.remove("li-active")
             }
         }
     })
 
-    openJoinusers.addEventListener("click", (e) => {
+    openFiles.addEventListener("click", (e) => {
         e.preventDefault()
 
         if (!open) {
@@ -96,26 +96,26 @@ window.addEventListener("load", function () {
             open = true;
             chattingContainer.classList.add("hidden")
             questionContainer.classList.add("hidden")
-            joinusersContainer.classList.remove("hidden")
+            FilesContainer.classList.remove("hidden")
             ctn = 2;
             openChatting.classList.remove("li-active")
             openQuestion.classList.remove("li-active")
-            openJoinusers.classList.add("li-active")
+            openFiles.classList.add("li-active")
         } else {
             if (ctn == 2) {
                 sidebarContents.classList.add("hidden")
                 open = false;
                 openChatting.classList.remove("li-active")
                 openQuestion.classList.remove("li-active")
-                openJoinusers.classList.remove("li-active")
+                openFiles.classList.remove("li-active")
             } else {
                 chattingContainer.classList.add("hidden")
                 questionContainer.classList.add("hidden")
-                joinusersContainer.classList.remove("hidden")
+                FilesContainer.classList.remove("hidden")
                 ctn = 2;
                 openChatting.classList.remove("li-active")
                 openQuestion.classList.remove("li-active")
-                openJoinusers.classList.add("li-active")
+                openFiles.classList.add("li-active")
             }
         }
     })

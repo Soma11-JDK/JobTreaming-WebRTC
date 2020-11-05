@@ -1,0 +1,19 @@
+const imageBtn = document.querySelector("#Files-Btn-image");
+const imageContents = document.querySelector(".Image-contents");
+const fileBtn = document.querySelector("#Files-Btn-file");
+const fileContents = document.querySelector(".Files-contents");
+
+imageBtn.addEventListener('click', () => {
+    imageContents.classList.remove('hidden');
+    fileContents.classList.add('hidden');
+    imageBtn.classList.add('pushed');
+    fileBtn.classList.remove('pushed');
+})
+
+fileBtn.addEventListener('click', () => {
+    imageContents.classList.add('hidden');
+    fileContents.classList.remove('hidden');
+    fileBtn.classList.add('pushed');
+    imageBtn.classList.remove('pushed');
+})
+

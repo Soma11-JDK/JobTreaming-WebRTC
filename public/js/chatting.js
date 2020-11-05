@@ -58,7 +58,6 @@ socket.on(EVENT.CHAT_DOCUMENT, (data) => {
             <i class="document__icon far fa-arrow-alt-circle-down"></i>
         </a>
     </div>`;
-
     makeChat(data.userName, data.time.substring(11, 16), contents);
 });
 
