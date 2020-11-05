@@ -1,5 +1,8 @@
+const questionInput = document.querySelector(".question-form__input");
+const questionButton = document.querySelector(".question-form__button");
+const questionContents = document.querySelector('.question-contents');
+
 const makeQuestion = (sender, time, text, like, comments, questionId) => {
-    const questionContents = document.querySelector('.question-contents');
     const questionBox = document.createElement('div');
     questionBox.classList.add('questionBox');
     questionBox.id = `J${questionId}`;
@@ -115,9 +118,6 @@ socket.on('question', (data) => {
     })
 })
 
-const questionInput = document.querySelector(".question-form__input");
-const questionButton = document.querySelector(".question-form__button");
-
 //questionSubmitHandler
 const questionSubmitHandler = () => {
     if (questionInput.value) {
@@ -126,6 +126,5 @@ const questionSubmitHandler = () => {
         questionInput.value = '';
     }
 };
-
 questionInput.addEventListener('keypress', (e) => { if (e.which == 13) { questionSubmitHandler(); } });
 questionButton.addEventListener('click', questionSubmitHandler);

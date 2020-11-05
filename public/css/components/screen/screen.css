@@ -90,3 +90,30 @@
 #jsPlayButton:hover{
     background-color: rgba( 0, 0, 0, 0.6 );
 }
+
+.balloon_01 {
+    position: relative;
+    margin: 15px;
+    background: #e6e8e9;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+    margin-left: 40px;
+}
+.balloon_01:after {
+    border-top: 0px solid transparent;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #e6e8e9;
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 18px;
+}
+.balloon_01 span{
+    display: block;
+}
+
+.videoPlayer__live:hover .balloon_01{
+    display: block;
+}

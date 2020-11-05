@@ -1,22 +1,26 @@
 import mongoose from "mongoose";
 
-const CommentSchema = new mongoose.Schema({
+const FileSchema = new mongoose.Schema({
+    fileName: {
+        type: String,
+        required: "fileName is required"
+    },
+    fileSize: Number,
+    fileType: {
+        type: String,
+        enum: ["image", "file"]
+    },
+    fileURL: {
+        type: String,
+        required: "fileURL is required"
+    },
     room: {
         type: String,
         required: "room is required"
     },
-    writer: {
-        type: String,
-        required: "writer is required"
-    },
     time: {
         type: Date,
         default: getCurrentDate(new Date())
-    },
-    context: String,
-    file: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "File"
     }
 });
 
@@ -32,5 +36,5 @@ function getCurrentDate() {
     return new Date(Date.UTC(year, month, today, hours, minutes, seconds, milliseconds));
 }
 
-const model = mongoose.model("Comment", CommentSchema);
+const model = mongoose.model("File", FileSchema);
 export default model;

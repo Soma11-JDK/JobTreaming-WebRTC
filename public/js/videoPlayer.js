@@ -1,3 +1,4 @@
+//playTime repactoring
 const videoPlayer = document.getElementById("jsVideoPlayer");
 const playBtn = document.getElementById("jsPlayButton");
 const volumeBtn = document.getElementById("jsVolumeButton");
@@ -79,7 +80,7 @@ var currentTime = 0;
 function printTime() {
     currentTime++;
     playTime.innerHTML = formatDate(currentTime);
-    console.log(currentTime);
+
 }
 
 function handleDrag(event) {

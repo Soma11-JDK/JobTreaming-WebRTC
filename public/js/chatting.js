@@ -1,5 +1,9 @@
+const chattingInput = document.querySelector(".chatting-form__input");
+const chattingButton = document.querySelector(".chatting-form__button");
+const fileSelect = document.querySelector(".chatting-form__file");
+const chattingContents = document.querySelector('.chatting-contents');
+
 function makeChat(sender, time, contents) {
-    const chattingContents = document.querySelector('.chatting-contents');
     const messageRow = document.createElement('div');
     messageRow.classList.add('message-row');
     if (sender == userName) {
@@ -30,7 +34,6 @@ function makeChat(sender, time, contents) {
 }
 
 socket.on(EVENT.NOTICE, (msg) => {
-    const chattingContents = document.querySelector('.chatting-contents');
     const div = document.createElement('div');
     div.classList.add('chat__notice');
     div.textContent = msg;
@@ -48,10 +51,10 @@ socket.on(EVENT.CHAT_DOCUMENT, (data) => {
     const contents = `
     <div class="message__document">
         <div class="document__text">
-            <span class="document__text__name">${data.document}</span>
+            <span class="document__text__name">${data.documentName}</span>
             <span>${data.size}bytes</span>
         </div>
-        <a href="/upload/${data.document}" download>
+        <a href="${data.document}" download>
             <i class="document__icon far fa-arrow-alt-circle-down"></i>
         </a>
     </div>`;
@@ -62,18 +65,13 @@ socket.on(EVENT.CHAT_DOCUMENT, (data) => {
 socket.on(EVENT.CHAT_IMAGE, (data) => {
 
     const contents = `
-        <a href="/upload/${data.image}" download="${data.image}"> 
-            <img class="message__image" src="/upload/${data.image}">
+        <a href="${data.image}" download="${data.image}"> 
+            <img class="message__image" src="${data.image}">
             </img>
         </a>
     `;
     makeChat(data.userName, data.time.substring(11, 16), contents);
 });
-
-const chattingInput = document.querySelector(".chatting-form__input");
-const chattingButton = document.querySelector(".chatting-form__button");
-const fileSelect = document.querySelector(".chatting-form__file");
-
 const chattingSubmitHandler = () => {
     if (chattingInput.value) {
         const text = chattingInput.value;
@@ -84,11 +82,8 @@ const chattingSubmitHandler = () => {
 
 const fileChangeHandler = (e) => {
     e.preventDefault();
-    const now = new Date();
-    const time = now.getHours() + ":" + now.getMinutes();
-    uploader.upload(fileSelect.files, { data: { userName, roomName, time } });
+    uploader.upload(fileSelect.files, { data: { userName, roomName } });
 }
-
 chattingInput.addEventListener('keypress', (e) => { if (e.which == 13) { chattingSubmitHandler(); } });
 chattingButton.addEventListener('click', chattingSubmitHandler);
 fileSelect.addEventListener('change', fileChangeHandler);

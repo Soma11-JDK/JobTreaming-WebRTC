@@ -39,7 +39,9 @@
 .scrnIcon{
     position: relative;
 }
-
+.audioOutputIcon{
+    position: relative;
+}
 .fa-slash{
     position: absolute;
     left: -1px;
@@ -57,11 +59,18 @@
     width: 300px;
 }
 
-
 .audioSelectWrap:hover ~#audioSource{
     width: 300px;
 }
 
 #audioSource:hover{
+    width: 300px;
+}
+
+.audioOutputSelectWrap:hover ~#audioOutputSource{
+    width: 300px;
+}
+
+#audioOutputSource:hover{
     width: 300px;
 }

@@ -1,28 +1,3 @@
-const userName = document.querySelector(".userName").textContent;
-const roomName = document.querySelector(".roomName").textContent;
-const videoElement = document.querySelector(".screen-video");
-const video = document.querySelector("video");
-var startTime;
-
-let peerConnection;
-const config = {
-    iceServers: [
-        {
-            "urls": "stun:stun.l.google.com:19302",
-        },
-        // { 
-        //   "urls": "turn:TURN_IP?transport=tcp",
-        //   "username": "TURN_USERNAME",
-        //   "credential": "TURN_CREDENTIALS"
-        // }
-    ]
-};
-
-const socket = io.connect('/main');
-var uploader = new SocketIOFileClient(socket);
-
-socket.emit(EVENT.JOINROOM, { userName, roomName });
-
 socket.on('join-success', () => {
     socket.emit(EVENT.VIEWER_READY, roomName);
 });
@@ -69,7 +44,3 @@ socket.on(EVENT.CANDIDATE, (data) => {
 socket.on(EVENT.STREAMER_READY, () => {
     socket.emit(EVENT.VIEWER_READY, roomName);
 });
-
-window.onunload = window.onbeforeunload = () => {
-    socket.close();
-};
