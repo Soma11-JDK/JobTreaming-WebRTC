@@ -9,7 +9,7 @@
     padding: 7px;
     border-radius: 25px;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    width: 75%;
+    width: 82%;
     font-size: 13px;
 }
 
@@ -21,15 +21,4 @@
 
 .question-form__button:hover{
     background-color: #cacaca;
-}
-
-#questionFileSelect{
-    position: absolute;
-    width: 1px; 
-    height: 1px; 
-    padding: 0; 
-    margin: -1px; 
-    overflow: hidden; 
-    clip:rect(0,0,0,0); 
-    border: 0;
 }

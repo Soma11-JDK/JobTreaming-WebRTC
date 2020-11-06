@@ -57,6 +57,24 @@ audioOutputSelectWrap.addEventListener("click", (e) => {
         audioOutputIcon.innerHTML = "";
     }
 });
+
+// function handleSuccess(stream) {
+//     startButton.disabled = true;
+//     const video = document.querySelector('video');
+//     video.srcObject = stream;
+
+//     // demonstrates how to detect that the user has stopped
+//     // sharing the screen via the browser UI.
+//     stream.getVideoTracks()[0].addEventListener('ended', () => {
+//         errorMsg('The user has ended sharing the screen');
+//         startButton.disabled = false;
+//     });
+// }
+
+// function handleError(error) {
+//     errorMsg(`getDisplayMedia error: ${error.name}`, error);
+// }
+
 //share scrn
 scrnSharWrap.addEventListener("click", (e) => {
 
@@ -65,6 +83,7 @@ scrnSharWrap.addEventListener("click", (e) => {
         window.stream = stream;
         videoElement.srcObject = stream;
     });
+    // navigator.mediaDevices.getDisplayMedia({video: true}).then(handleSuccess, handleError);
 
     if (scrnIcon.innerHTML == "") {
         scrnIcon.innerHTML = '<i class="fas fa-slash"></i><i class="fas fa-slash slh"></i>';

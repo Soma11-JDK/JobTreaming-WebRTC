@@ -2,6 +2,8 @@ const chattingInput = document.querySelector(".chatting-form__input");
 const chattingButton = document.querySelector(".chatting-form__button");
 const fileSelect = document.querySelector(".chatting-form__file");
 const chattingContents = document.querySelector('.chatting-contents');
+const imageContents = document.querySelector(".Image-contents");
+const fileContents = document.querySelector(".Files-contents");
 
 function makeChat(sender, time, contents) {
     const messageRow = document.createElement('div');
@@ -59,6 +61,23 @@ socket.on(EVENT.CHAT_DOCUMENT, (data) => {
         </a>
     </div>`;
     makeChat(data.userName, data.time.substring(11, 16), contents);
+
+    const doc = Object.assign(document.createElement('div'),
+        {
+            className: "docDiv",
+            innerHTML: `
+            <div class="document__text">
+                <span class="document__text__name">${data.documentName}</span>
+                <span>${data.size}bytes</span>
+            </div>
+            <a href="${data.document}" download>
+                <i class="document__icon far fa-arrow-alt-circle-down"></i>
+            </a>
+            `
+        }
+    );
+    fileContents.appendChild(doc);
+    chattingContents.scrollTop = chattingContents.scrollHeight;
 });
 
 socket.on(EVENT.CHAT_IMAGE, (data) => {
@@ -70,7 +89,20 @@ socket.on(EVENT.CHAT_IMAGE, (data) => {
         </a>
     `;
     makeChat(data.userName, data.time.substring(11, 16), contents);
+
+    const image = Object.assign(document.createElement('div'),
+        {
+            className: "imageDiv",
+            innerHTML: `<a href="${data.image}" download="${data.image}"> 
+                            <img src="${data.image}"></img>
+                        </a>`
+        }
+    );
+    imageContents.appendChild(image);
+    chattingContents.scrollTop = chattingContents.scrollHeight;
 });
+
+
 const chattingSubmitHandler = () => {
     if (chattingInput.value) {
         const text = chattingInput.value;

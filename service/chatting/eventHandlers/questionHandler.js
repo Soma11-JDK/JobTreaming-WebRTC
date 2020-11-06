@@ -10,14 +10,7 @@ const questionHandler = async (socket, data) => {
             writer: data.userName,
             context: data.text
         });
-        main.in(data.roomName).emit('question', {
-            userName: data.userName,
-            text: data.text,
-            time: newQuestion.time,
-            like: newQuestion.like,
-            comments: newQuestion.questionComments.length,
-            questionId: newQuestion._id
-        });
+        main.in(data.roomName).emit('question', newQuestion);
         console.log('question', data, newQuestion.time, newQuestion.questionComments.length, newQuestion.questionComments.length, newQuestion._id);
     } catch (error) {
         console.log(error);
@@ -67,4 +60,14 @@ const questionCommentHandler = async (socket, data) => {
     }
 }
 
-module.exports = { questionHandler, likeUpHandler, likeDownHandler, questionCommentHandler };
+const questionAllHandler = async (socket, roomName) => {
+    try {
+        console.log('qeustionAll', roomName);
+        const questions = await Question.find({ room: roomName }).populate('questionComments');
+        socket.emit('qeustionAll', questions);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = { questionHandler, likeUpHandler, likeDownHandler, questionCommentHandler, questionAllHandler };

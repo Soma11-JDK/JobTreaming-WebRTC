@@ -4,7 +4,7 @@ mongoose.connect(
     "mongodb://localhost:27017/jobtreaming",
     {
         useNewUrlParser: true,
-        useFindAndModify: false
+        useFindAndModify: false,
     }
 );
 

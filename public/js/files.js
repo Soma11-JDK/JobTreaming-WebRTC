@@ -1,7 +1,6 @@
 const imageBtn = document.querySelector("#Files-Btn-image");
-const imageContents = document.querySelector(".Image-contents");
 const fileBtn = document.querySelector("#Files-Btn-file");
-const fileContents = document.querySelector(".Files-contents");
+
 
 imageBtn.addEventListener('click', () => {
     imageContents.classList.remove('hidden');
