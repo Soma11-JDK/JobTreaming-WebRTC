@@ -36,6 +36,10 @@
     background-color: #d5d6d6;
 }
 
+._disable{
+    background-color: #d5d6d6;
+}
+
 .scrnIcon{
     position: relative;
 }

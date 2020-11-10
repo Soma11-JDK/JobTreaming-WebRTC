@@ -102,7 +102,7 @@ function init() {
     playBtn.addEventListener("click", handlePlayClick);
     volumeBtn.addEventListener("click", handleVolumeClick);
     fullScrnBtn.addEventListener("click", goFullScreen);
-    videoElement.addEventListener("loadedmetadata", () => { setInterval(printTime, 1000); });
+    // videoElement.addEventListener("loadedmetadata", () => { setInterval(printTime, 1000); });
     volumeRange.addEventListener("input", handleDrag);
 }
 
