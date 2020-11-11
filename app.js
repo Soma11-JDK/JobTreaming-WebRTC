@@ -30,8 +30,6 @@ app.get('/socket.io.js.map', (req, res) => {
 app.use('/', streamingRouter);
 app.use((req, res) => { res.redirect('/'); });
 
-
-
 //app.service == socket.io
 app.service = service;
 

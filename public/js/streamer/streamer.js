@@ -1,6 +1,6 @@
 window.onunload = window.onbeforeunload = () => {
     //후기작성창 띄우기
-    window.stream.getVideoTracks()[0].enabled = false;
+    videoElement.srcObject.getVideoTracks()[0].enabled = false;
     socket.close();
 };
 
@@ -48,8 +48,7 @@ function changeVideoHandler() {
                 }
             });
         }
-        stream.addTrack(window.stream.getAudioTracks()[0]);
-        window.stream = stream;
+        stream.addTrack(videoElement.srcObject.getAudioTracks()[0]);
         videoElement.srcObject = stream;
         videoElement.classList.add('leftRightChange');
     });
@@ -71,8 +70,7 @@ function changeAudioHandler() {
                 }
             });
         }
-        stream.addTrack(window.stream.getVideoTracks()[0]);
-        window.stream = stream;
+        stream.addTrack(videoElement.srcObject.getVideoTracks()[0]);
         videoElement.srcObject = stream;
     });
 }
@@ -82,12 +80,13 @@ function videoEnableHandler(enb) {
         videoIcon.classList.add("fa-video");
         videoIcon.classList.remove("fa-video-slash");
         videoSelect.classList.remove("hidden");
-        window.stream.getVideoTracks()[0].enabled = true;
+        console.log(videoElement.srcObject);
+        videoElement.srcObject.getVideoTracks()[0].enabled = true;
     } else {
         videoIcon.classList.remove("fa-video");
         videoIcon.classList.add("fa-video-slash");
         videoSelect.classList.add("hidden");
-        window.stream.getVideoTracks()[0].enabled = false;
+        videoElement.srcObject.getVideoTracks()[0].enabled = false;
     }
 }
 
@@ -96,19 +95,17 @@ function audioEnableHandler(enb) {
         audioIcon.classList.add("fa-microphone");
         audioIcon.classList.remove("fa-microphone-slash");
         audioSelect.classList.remove("hidden");
-        window.stream.getAudioTracks()[0].enabled = true;
+        videoElement.srcObject.getAudioTracks()[0].enabled = true;
     } else {
         audioIcon.classList.remove("fa-microphone");
         audioIcon.classList.add("fa-microphone-slash");
         audioSelect.classList.add("hidden");
-        window.stream.getAudioTracks()[0].enabled = false;
+        videoElement.srcObject.getAudioTracks()[0].enabled = false;
     }
 }
 
-function getDevices() {
-    return navigator.mediaDevices.enumerateDevices();
-}
-function gotDevices(deviceInfos) {
+async function gotDevices() {
+    const deviceInfos = await navigator.mediaDevices.enumerateDevices();
     audioSelect.options.length = 0;
     videoSelect.options.length = 0;
     window.deviceInfos = deviceInfos;
@@ -128,52 +125,7 @@ function gotDevices(deviceInfos) {
     }
 }
 
-function getStream() {
-    if (window.stream) {
-        window.stream.getTracks().forEach(track => {
-            track.stop();
-        });
-    }
-    const audioSource = audioSelect.value;
-    const videoSource = videoSelect.value;
-    console.log(audioSource, videoSource);
-    const constraints = {
-        audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
-        video: { deviceId: videoSource ? { exact: videoSource } : undefined }
-    };
-    // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-    return navigator.mediaDevices
-        .getUserMedia(constraints)
-        .then(gotStream)
-        .catch(handleError);
-}
 
-function gotStream(stream) {
-    //window.stream에 로컬 MediaStream객체 저장.
-    window.stream = stream;
-
-    //로컬 MediaStream의 video와 audio를 selected한다. 제일 처음을 위해서..
-    audioSelect.selectedIndex = [...audioSelect.options].findIndex(
-        option => option.text === stream.getAudioTracks()[0].label
-    );
-    videoSelect.selectedIndex = [...videoSelect.options].findIndex(
-        option => option.text === stream.getVideoTracks()[0].label
-    );
-    //Enable check
-    videoEnableHandler(videoEnable);
-    audioEnableHandler(audioEnable);
-    //로컬비디오에도 스트림을 등록시킨다.
-    videoElement.srcObject = window.stream;
-    //스트리머는 스트림을 주고받을 준비가 완료됨.
-    socket.emit(EVENT.STREAMER_READY, roomName);
-}
-
-function streamInit() {
-    //select list 초기화
-    getDevices().then(gotDevices);
-    //stream초기화
-    getStream();
-}
 
 function toggleEnableVideoHandler() {
     videoEnable = !videoEnable;
@@ -186,25 +138,11 @@ function toggleEnableAudioHandler() {
     audioEnableHandler(audioEnable);
 }
 
-//video enable
-videoSelectWrap.addEventListener("click", toggleEnableVideoHandler);
-
-//audio enable
-audioSelectWrap.addEventListener("click", toggleEnableAudioHandler);
-
-//audiooutput enable
-audioOutputSelectWrap.addEventListener("click", (e) => {
-    handleVolumeClick();
-    audioOutputSelect.classList.toggle("hidden");
-    if (audioOutputIcon.innerHTML == "") {
-        audioOutputIcon.innerHTML = '<i class="fas fa-slash"></i><i class="fas fa-slash slh"></i>';
-    } else {
-        audioOutputIcon.innerHTML = "";
-    }
-});
-
 function startCapture() {
     navigator.mediaDevices.getDisplayMedia({ video: true }).then((stream) => {
+        videoEnable = false;
+        videoEnableHandler(videoEnable);
+        //remote
         for (let key in peerConnections) {
             const pc = peerConnections[key]
             console.log(pc.getSenders());
@@ -214,22 +152,28 @@ function startCapture() {
                 }
             });
         }
-        stream.addTrack(window.stream.getAudioTracks()[0]);
-        window.stream = stream;
+        //rocal
+        stream.addTrack(videoElement.srcObject.getAudioTracks()[0]);
         videoElement.srcObject = stream;
         videoElement.classList.remove('leftRightChange');
-        videoSelectWrap.classList.add('_disable');
-        videoSelectWrap.removeEventListener("click", toggleEnableVideoHandler);
-        videoElement.srcObject.getVideoTracks()[0].onended = () => {
-            videoSelectWrap.classList.remove('_disable');
-            videoSelectWrap.addEventListener("click", toggleEnableVideoHandler);
-        };
+        socket.emit('startCapture', roomName);
         scrnSharWrap.removeEventListener("click", startCapture);
         scrnSharWrap.addEventListener("click", stopCapture);
+        //video disable
+        videoSelectWrap.classList.add('_disable');
+        videoSelectWrap.classList.remove('hoverb');
+        videoSelectWrap.removeEventListener("click", toggleEnableVideoHandler);
+        scrnIcon.innerHTML = "";
+        //stopEvent Handler
+        videoElement.srcObject.getVideoTracks()[0].onended = () => {
+            stopCapture();
+        };
+
     });
 }
 
-function stopCapture() {
+async function stopCapture() {
+    //remote
     for (let key in peerConnections) {
         const pc = peerConnections[key]
         console.log(pc.getSenders());
@@ -237,27 +181,92 @@ function stopCapture() {
             if (rtcrtpsender.track.kind == "video") {
                 console.log(rtcrtpsender);
                 rtcrtpsender.track.enabled = false;
+                rtcrtpsender.track.stop();
             }
         });
     }
+    //rocal
+    videoElement.srcObject.getVideoTracks()[0].enabled = false;
     videoElement.srcObject.getVideoTracks()[0].stop();
     videoElement.classList.add('leftRightChange');
-    videoSelectWrap.classList.remove('_disable');
-    videoSelectWrap.addEventListener("click", toggleEnableVideoHandler);
+    socket.emit('stopCapture', roomName);
     scrnSharWrap.removeEventListener("click", stopCapture);
     scrnSharWrap.addEventListener("click", startCapture);
+    //video able
+    scrnIcon.innerHTML = '<i class="fas fa-slash"></i><i class="fas fa-slash slh"></i>';
+    videoSelectWrap.classList.remove('_disable');
+    videoSelectWrap.addEventListener("click", toggleEnableVideoHandler);
 }
 
+function audioOutputEnableHandler() {
+    handleVolumeClick();
+    audioOutputSelect.classList.toggle("hidden");
+    if (audioOutputIcon.innerHTML == "") {
+        audioOutputIcon.innerHTML = '<i class="fas fa-slash"></i><i class="fas fa-slash slh"></i>';
+    } else {
+        audioOutputIcon.innerHTML = "";
+    }
+}
+
+function changeDeviceHandler() {
+    gotDevices();
+    if (videoElement.srcObject) {
+        videoElement.srcObject.getTracks().forEach(track => {
+            track.stop();
+        });
+    }
+    const audioSource = audioSelect.value;
+    const videoSource = videoSelect.value;
+    console.log(audioSource, videoSource);
+    const constraints = {
+        audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
+        video: { deviceId: videoSource ? { exact: videoSource } : undefined }
+    };
+    navigator.mediaDevices.getUserMedia(constraints)
+        .then((stream) => {
+            audioSelect.selectedIndex = [...audioSelect.options].findIndex(
+                option => option.text === stream.getAudioTracks()[0].label
+            );
+            videoSelect.selectedIndex = [...videoSelect.options].findIndex(
+                option => option.text === stream.getVideoTracks()[0].label
+            );
+            videoEnableHandler(videoEnable);
+            audioEnableHandler(audioEnable);
+            videoElement.srcObject = stream;
+            socket.emit(EVENT.STREAMER_READY, roomName);
+        })
+        .catch(handleError);
+}
+
+function streamInit() {
+    gotDevices();
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        .then((stream) => {
+            audioSelect.selectedIndex = [...audioSelect.options].findIndex(
+                option => option.text === stream.getAudioTracks()[0].label
+            );
+            videoSelect.selectedIndex = [...videoSelect.options].findIndex(
+                option => option.text === stream.getVideoTracks()[0].label
+            );
+            videoElement.srcObject = stream;
+            videoEnableHandler(videoEnable);
+            audioEnableHandler(audioEnable);
+            socket.emit(EVENT.STREAMER_READY, roomName);
+            console.log(videoElement.srcObject);
+        })
+        .catch(handleError);
+}
+
+videoSelectWrap.addEventListener("click", toggleEnableVideoHandler);
+audioSelectWrap.addEventListener("click", toggleEnableAudioHandler);
+audioOutputSelectWrap.addEventListener("click", audioOutputEnableHandler);
 scrnSharWrap.addEventListener("click", startCapture);
 
-//선택된 비디오가 바뀌면 stream 초기화
 videoSelect.onchange = changeVideoHandler;
-//선택된 오디오가 바뀌면 stream 초기화
 audioSelect.onchange = changeAudioHandler;
-//선택된 아웃풋 오디오가 바뀜
 audioOutputSelect.onchange = changeAudioDestination;
-//디바이스가 바뀌면 select list 초기화, stream 초기화
-navigator.mediaDevices.ondevicechange = streamInit;
+
+navigator.mediaDevices.ondevicechange = changeDeviceHandler;
 
 socket.emit(EVENT.JOINROOM, { userName, roomName });
 
