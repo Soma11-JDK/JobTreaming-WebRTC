@@ -6,6 +6,9 @@ const streamingRouter = express.Router();
 
 const getStreaming = (req, res) => {
     //lectureId, password, jwt 받음.
+    if (!req.query.lectureId && !req.headers.jwt) {
+        res.status(500).end();
+    }
     const lectureId = req.query.lectureId;
     const jwt = req.headers.jwt;
 
