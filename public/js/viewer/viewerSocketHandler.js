@@ -44,3 +44,11 @@ socket.on(EVENT.CANDIDATE, (data) => {
 socket.on(EVENT.STREAMER_READY, () => {
     socket.emit(EVENT.VIEWER_READY, roomName);
 });
+
+socket.on('startCapture', () => {
+    videoElement.classList.remove('leftRightChange');
+})
+
+socket.on('stopCapture', () => {
+    videoElement.classList.add('leftRightChange');
+})

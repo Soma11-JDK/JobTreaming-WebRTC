@@ -15,6 +15,11 @@ const joinRoomHandler = (socket, data) => {
     main.in(roomName).emit('joinusers', joinusers);
 }
 
+const startCaptureHandler = (socket, roomName) => {
+    main.in(roomName).emit('startCapture');
+}
 
-
-module.exports = { joinRoomHandler };
+const stopCaptureHandler = (socket, roomName) => {
+    main.in(roomName).emit('stopCapture');
+}
+module.exports = { joinRoomHandler, startCaptureHandler, stopCaptureHandler };

@@ -5,6 +5,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import streamingRouter from "./streamingRouter";
 import service from "./service";
+import cors from "cors";
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-
+app.use(cors({credentials: true, withCredentials: true}));
 
 app.get('/socket.io.js', (req, res, next) => {
     return res.sendFile(__dirname + '/node_modules/socket.io-client/dist/socket.io.js');
@@ -28,9 +29,6 @@ app.get('/socket.io.js.map', (req, res) => {
 });
 
 app.use('/', streamingRouter);
-app.use((req, res) => { res.redirect('/'); });
-
-
 
 //app.service == socket.io
 app.service = service;

@@ -10,11 +10,11 @@
 
     .streamingTitle
         .titleTop
-            span 실리콘벨리 개발자가 알려주는 프론트엔드 취업가이드
+            span [#{category}] - #{title}
         .titleButtom
             span.streamerName 제임스 오
             i.far.fa-clock
-            span.titleTime 18:00 - 19:30 (90분)
+            span.titleTime #{startedAt} - #{endedAt}
 
     if streamer == false
         .haeder__exit
