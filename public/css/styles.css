@@ -3,6 +3,7 @@
 @import "reset.css";
 
 /* Components */
+@import "components/screen/review.css";
 @import "components/screen/screen.css";
 @import "components/screen/screen-header.css";
 @import "components/screen/screen-footer.css";

@@ -35,6 +35,8 @@
     border-radius: 20px;
     margin-right: 12px;
     color: mintcream;
+    border: none;
+    outline: none;
 }
 
 .streamingTitle{
