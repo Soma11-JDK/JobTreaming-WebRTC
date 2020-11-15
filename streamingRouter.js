@@ -6,14 +6,12 @@ const streamingRouter = express.Router();
 
 const getStreaming = (req, res) => {
     //lectureId, password, jwt 받음.
-    if (!req.query.lectureId && !req.headers.jwt) {
-        res.status(200).end();
-    } else {
+    if (req.query.lectureId && req.query.jwt){
         const lectureId = req.query.lectureId;
-        const jwt = req.headers.jwt;
+        const jwt = req.query.jwt;
 
         const password = makePassword(lectureId);
-        var headers = { 'Authorization': 'Bearer ' + jwt };
+        var headers = { 'Authorization':  jwt };
         var options = {
             url: 'http://117.16.136.156:8085/lecture/join',
             method: 'GET',
