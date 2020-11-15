@@ -56,13 +56,44 @@ window.addEventListener("load", function () {
 
     //강연리뷰
     function SendReviewHandler() {
-        console.log(starScore);
-        console.log(reviewText.value);
+        axios.request(
+            {
+                method: 'POST',
+                url: `http://117.16.136.156:8085/review/add`,
+                headers: { 'Authorization': jwt },
+                data: {
+                    "lecture": roomName,
+                    "contents": reviewText.value,
+                    "rating": starScore
+                }
+            }
+        );
     }
 
     //강연자평가
     function SendExpertHandler() {
-        console.log(kq.getIndex());
+        let kd = new Array(7).fill(0);
+        kq.getIndex().forEach((i) => {
+            kd[i + 1] = 1;
+        })
+
+        let keyword = "{";
+        for (let i = 1; i < 7; i++) {
+            eval = `"rating${i}", ${kd[i]},`;
+        }
+        keyword = "}";
+
+        axios.request(
+            {
+                method: 'POST',
+                url: `http://117.16.136.156:8085/evaluation/add`,
+                headers: { 'Authorization': jwt },
+                data:
+                {
+                    "evaluation": keyword
+                }
+            }
+        );
     }
 
     function reviewSubmitHandler() {
