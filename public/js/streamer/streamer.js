@@ -107,6 +107,7 @@ function audioEnableHandler(enb) {
 async function gotDevices() {
     const deviceInfos = await navigator.mediaDevices.enumerateDevices();
     audioSelect.options.length = 0;
+    audioOutputSelect.options.length = 0;
     videoSelect.options.length = 0;
     window.deviceInfos = deviceInfos;
     for (const deviceInfo of deviceInfos) {
@@ -230,9 +231,9 @@ function changeDeviceHandler() {
             videoSelect.selectedIndex = [...videoSelect.options].findIndex(
                 option => option.text === stream.getVideoTracks()[0].label
             );
+            videoElement.srcObject = stream;
             videoEnableHandler(videoEnable);
             audioEnableHandler(audioEnable);
-            videoElement.srcObject = stream;
             socket.emit(EVENT.STREAMER_READY, roomName);
         })
         .catch(handleError);
