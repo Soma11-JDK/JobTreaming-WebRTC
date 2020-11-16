@@ -47,7 +47,6 @@ window.addEventListener("load", function () {
     const keywordBtn = document.querySelectorAll(".keyword-Btn");
     const reviewSubmit = document.querySelector('.review-submit');
     const reviewText = document.querySelector(".review-comment textarea");
-    const axios = require("axios");
     const kq = new KeywordQueue();
     let starScore;
 
