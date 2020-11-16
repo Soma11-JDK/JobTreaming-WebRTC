@@ -1,3 +1,5 @@
+const { response } = require('express');
+
 class KeywordQueue {
     constructor() {
         this.store = [];
@@ -56,8 +58,7 @@ window.addEventListener("load", function () {
 
     //강연리뷰
     async function SendReviewHandler() {
-        const url = 'http://117.16.136.156:8085/review/add';
-        const response = await fetch(url, {
+        await fetch('http://117.16.136.156:8085/review/add', {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -68,9 +69,9 @@ window.addEventListener("load", function () {
                 "contents": reviewText.value,
                 "rating": starScore
             })
-        });
-        const myJson = await response.json();
-        console.log(myJson);
+        }).then((response) => {
+            console.log(JSON.stringify(response.json()));
+        })
     }
 
     //강연자평가
@@ -86,18 +87,19 @@ window.addEventListener("load", function () {
         }
         keyword = "}";
         const url = 'http://117.16.136.156:8085/evaluation/add';
-        const response = await fetch(url, {
+        await fetch(url, {
             method: 'POST',
             mode: 'cors',
             headers: {
                 'Authorization': jwt
             },
             body: JSON.stringify({
+                "expertId": expertId,
                 "evaluation": keyword
             })
+        }).then((response) => {
+            console.log(JSON.stringify(response.json()));
         });
-        const myJson = await response.json();
-        console.log(myJson);
     }
 
     function reviewSubmitHandler() {
