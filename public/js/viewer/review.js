@@ -56,8 +56,8 @@ window.addEventListener("load", function () {
 
     //강연리뷰
     async function SendReviewHandler() {
-
-        const response = await fetch('http://117.16.136.156:8085/review/add', {
+        const url = 'http://117.16.136.156:8085/review/add';
+        const response = await fetch(url, {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -85,8 +85,8 @@ window.addEventListener("load", function () {
             eval = `"rating${i}", ${kd[i]},`;
         }
         keyword = "}";
-
-        const response = await fetch('http://117.16.136.156:8085/evaluation/add', {
+        const url = 'http://117.16.136.156:8085/evaluation/add';
+        const response = await fetch(url, {
             method: 'POST',
             mode: 'cors',
             headers: {
