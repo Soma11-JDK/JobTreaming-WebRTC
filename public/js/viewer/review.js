@@ -55,19 +55,21 @@ window.addEventListener("load", function () {
     function alertDone() { alert("이미 제출하셨습니다."); }
 
     //강연리뷰
-    function SendReviewHandler() {
-        axios.request(
-            {
-                method: 'POST',
-                url: `http://117.16.136.156:8085/review/add`,
-                headers: { 'Authorization': jwt },
-                data: {
-                    "lecture": roomName,
-                    "contents": reviewText.value,
-                    "rating": starScore
-                }
-            }
-        );
+    async function SendReviewHandler() {
+
+        const response = await fetch('http://117.16.136.156:8085/review/add', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Authorization': jwt
+            },
+            body: JSON.stringify({
+                "lecture": roomName,
+                "contents": reviewText.value,
+                "rating": starScore
+            })
+        });
+        const myJson = await response.json();
     }
 
     //강연자평가
@@ -83,17 +85,17 @@ window.addEventListener("load", function () {
         }
         keyword = "}";
 
-        axios.request(
-            {
-                method: 'POST',
-                url: `http://117.16.136.156:8085/evaluation/add`,
-                headers: { 'Authorization': jwt },
-                data:
-                {
-                    "evaluation": keyword
-                }
-            }
-        );
+        const response = await fetch('http://117.16.136.156:8085/evaluation/add', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Authorization': jwt
+            },
+            body: JSON.stringify({
+                "evaluation": keyword
+            })
+        });
+        const myJson = await response.json();
     }
 
     function reviewSubmitHandler() {
