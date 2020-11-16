@@ -3,8 +3,8 @@ html
     head
         link(rel="stylesheet",type="text/css",href="css/styles.css")
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU", crossorigin="anonymous")
-        meta(http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://unpkg.com/axios/dist/axios.min.js 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;")
-        //- script(src="https://unpkg.com/axios/dist/axios.min.js")
+        meta(http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-eval'")
+        script(src="https://unpkg.com/axios/dist/axios.min.js")
         title Jobstreaming
     body
         .full-screen
