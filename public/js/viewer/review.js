@@ -70,10 +70,11 @@ window.addEventListener("load", function () {
             })
         });
         const myJson = await response.json();
+        console.log(myJson);
     }
 
     //강연자평가
-    function SendExpertHandler() {
+    async function SendExpertHandler() {
         let kd = new Array(7).fill(0);
         kq.getIndex().forEach((i) => {
             kd[i + 1] = 1;
@@ -96,6 +97,7 @@ window.addEventListener("load", function () {
             })
         });
         const myJson = await response.json();
+        console.log(myJson);
     }
 
     function reviewSubmitHandler() {
