@@ -3,6 +3,9 @@ import EVENT from "../../event";
 import request from "request";
 
 const uploadReviewHandler = (socket, data) => {
+    let lecture = data.lecture;
+    lecture *= 1;
+
     const options = {
         url: 'http://117.16.136.156:8085/review/add',
         method: "POST",
@@ -11,7 +14,7 @@ const uploadReviewHandler = (socket, data) => {
             "Authorization": data.Authorization
         },
         body: {
-            "lecture": data.lecture,
+            "lecture": lecture,
             "contents": data.contents,
             "rating": data.rating
         },
@@ -25,6 +28,9 @@ const uploadReviewHandler = (socket, data) => {
 }
 
 const uploadExpertHandler = (socket, data) => {
+    let expert = data.expertId;
+    expert *= 1;
+
     const options = {
         url: 'http://117.16.136.156:8085/evaluation/add',
         method: "POST",
@@ -33,7 +39,7 @@ const uploadExpertHandler = (socket, data) => {
             "Authorization": data.Authorization
         },
         body: {
-            "expert": data.expertId,
+            "expert": expert,
             "evaluation": data.evaluation
         },
         json: true
