@@ -79,11 +79,14 @@ window.addEventListener("load", function () {
         if (!starScore || kq.getIndex().length < 3) {
             alert("별점과 키워드3개 는 반드시 선택해야합니다.")
         }
-        SendReviewHandler();
-        SendExpertHandler();
-        reviewCloseHandler();
-        reviewOpen.removeEventListener('click', reviewOpenHandler);
-        reviewOpen.addEventListener('click', alertDone);
+        else {
+            SendReviewHandler();
+            SendExpertHandler();
+            reviewCloseHandler();
+            alert("제출성공");
+            reviewOpen.removeEventListener('click', reviewOpenHandler);
+            reviewOpen.addEventListener('click', alertDone);
+        }
     }
 
 
