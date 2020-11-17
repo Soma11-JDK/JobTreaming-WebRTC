@@ -33,7 +33,7 @@ const uploadExpertHandler = (socket, data) => {
             "Authorization": data.Authorization
         },
         body: {
-            "expertId": data.expertId,
+            "expert": data.expertId,
             "evaluation": data.evaluation
         },
         json: true
