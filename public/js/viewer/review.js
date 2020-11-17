@@ -68,8 +68,9 @@ window.addEventListener("load", function () {
 
         let keyword = "{";
         for (let i = 1; i < 7; i++) {
-            keyword += `"rating${i}", ${kd[i]},`;
+            keyword += `"rating${i}": ${kd[i]},`;
         }
+        keyword.slice(0, -1);
         keyword += "}";
         socket.emit('expert', { Authorization: jwt, expertId: expertId, evaluation: keyword });
     }
