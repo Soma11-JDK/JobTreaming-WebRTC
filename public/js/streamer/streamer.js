@@ -1,5 +1,6 @@
 window.onunload = window.onbeforeunload = () => {
     //후기작성창 띄우기
+    window.stream.getVideoTracks()[0].enabled = false;
     videoElement.srcObject.getVideoTracks()[0].enabled = false;
     socket.close();
 };
@@ -48,7 +49,8 @@ function changeVideoHandler() {
                 }
             });
         }
-        stream.addTrack(videoElement.srcObject.getAudioTracks()[0]);
+        stream.addTrack(window.stream.getAudioTracks()[0]);
+        window.stream = stream;
         videoElement.srcObject = stream;
         videoElement.classList.add('leftRightChange');
     });
@@ -70,7 +72,8 @@ function changeAudioHandler() {
                 }
             });
         }
-        stream.addTrack(videoElement.srcObject.getVideoTracks()[0]);
+        stream.addTrack(window.stream.getVideoTracks()[0]);
+        window.stream = stream;
         videoElement.srcObject = stream;
     });
 }
@@ -81,12 +84,12 @@ function videoEnableHandler(enb) {
         videoIcon.classList.remove("fa-video-slash");
         videoSelect.classList.remove("hidden");
         console.log(videoElement.srcObject);
-        videoElement.srcObject.getVideoTracks()[0].enabled = true;
+        window.stream.getVideoTracks()[0].enabled = true;
     } else {
         videoIcon.classList.remove("fa-video");
         videoIcon.classList.add("fa-video-slash");
         videoSelect.classList.add("hidden");
-        videoElement.srcObject.getVideoTracks()[0].enabled = false;
+        window.stream.getVideoTracks()[0].enabled = false;
     }
 }
 
@@ -95,12 +98,12 @@ function audioEnableHandler(enb) {
         audioIcon.classList.add("fa-microphone");
         audioIcon.classList.remove("fa-microphone-slash");
         audioSelect.classList.remove("hidden");
-        videoElement.srcObject.getAudioTracks()[0].enabled = true;
+        window.stream.getAudioTracks()[0].enabled = true;
     } else {
         audioIcon.classList.remove("fa-microphone");
         audioIcon.classList.add("fa-microphone-slash");
         audioSelect.classList.add("hidden");
-        videoElement.srcObject.getAudioTracks()[0].enabled = false;
+        window.stream.getAudioTracks()[0].enabled = false;
     }
 }
 
@@ -154,7 +157,8 @@ function startCapture() {
             });
         }
         //rocal
-        stream.addTrack(videoElement.srcObject.getAudioTracks()[0]);
+        stream.addTrack(window.stream.getAudioTracks()[0]);
+        window.stream = stream;
         videoElement.srcObject = stream;
         videoElement.classList.remove('leftRightChange');
         socket.emit('startCapture', roomName);

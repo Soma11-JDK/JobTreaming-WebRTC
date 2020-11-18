@@ -8,8 +8,8 @@ socket.on(EVENT.VIEWER_READY, viewerId => {
     peerConnections[viewerId] = peerConnection;
 
     //비디오소스를 스트림에 넣고, pc에 addTrack을 한다.
-    const stream = videoElement.srcObject;
-    //const stream = window.stream;
+    // const stream = videoElement.srcObject;
+    const stream = window.stream;
     stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
 
     //onicecandidate설정
