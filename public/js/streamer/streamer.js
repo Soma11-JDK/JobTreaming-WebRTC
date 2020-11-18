@@ -267,7 +267,7 @@ videoSelect.onchange = changeVideoHandler;
 audioSelect.onchange = changeAudioHandler;
 audioOutputSelect.onchange = changeAudioDestination;
 
-navigator.mediaDevices.ondevicechange = changeDeviceHandler;
+//navigator.mediaDevices.ondevicechange = changeDeviceHandler;
 
 socket.emit(EVENT.JOINROOM, { userName, roomName });
 
