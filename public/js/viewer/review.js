@@ -55,12 +55,13 @@ window.addEventListener("load", function () {
     function alertDone() { alert("이미 제출하셨습니다."); }
 
     //강연리뷰
-    async function SendReviewHandler() {
+
+    function SendReviewHandler() {
         socket.emit('review', { Authorization: jwt, lecture: roomName, contents: reviewText.value, rating: starScore });
     }
 
     //강연자평가
-    async function SendExpertHandler() {
+    function SendExpertHandler() {
         let kd = new Array(7).fill(0);
         kq.getIndex().forEach((i) => {
             kd[i + 1] = 1;
@@ -72,6 +73,7 @@ window.addEventListener("load", function () {
         }
         keyword = keyword.slice(0, -1);
         keyword += "}";
+
         socket.emit('expert', { Authorization: jwt, expertId: expertId, evaluation: keyword });
     }
 

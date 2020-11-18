@@ -20,7 +20,6 @@ const uploadReviewHandler = (socket, data) => {
         },
         json: true
     };
-    console.log(options);
     request.post(options, function (error, response, body) {
         console.log(error, response.statusCode);
     }
@@ -44,7 +43,7 @@ const uploadExpertHandler = (socket, data) => {
         },
         json: true
     };
-    console.log(options);
+
     request.post(options, function (error, response, body) {
         console.log(error, response.statusCode);
     }
