@@ -1,18 +1,16 @@
 .screen-header
     .header__logo
         img.logo__img(src="img/logo.png")
-    .header__roomname.hidden
-        span RoomName :
-        span.roomName #{roomName}
-    .header__streamername.hidden
-        span UserName : 
-        span.userName #{userName}
+        span.roomName.hidden #{roomName}
+        span.userName.hidden #{userName}
+        span.jwt.hidden #{jwt}
+        span.expertId.hidden #{expertId}
 
     .streamingTitle
         .titleTop
             span [#{category}] - #{title}
         .titleButtom
-            span.streamerName 제임스 오
+            span.streamerName #{expertName}
             i.far.fa-clock
             span.titleTime #{startedAt} - #{endedAt}
 
