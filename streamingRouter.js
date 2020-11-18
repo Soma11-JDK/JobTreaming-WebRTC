@@ -1,6 +1,7 @@
 import express from "express"; //for Routing
 import request from "request";
 import cryptoJS from 'crypto-js';
+import { roomInfo } from './db';
 
 const streamingRouter = express.Router();
 
@@ -49,9 +50,59 @@ const getStreaming = (req, res) => {
 
 streamingRouter.get("/", getStreaming);
 
+
+const getJoin = (req, res) => res.render("join");
+const postJoin = (req, res) => {
+    console.log(req.body.id, req.body.room);
+    let id = req.body.id;
+    let room = req.body.room;
+
+    //check id, room
+    if (isStreamer(id, room)) {
+        res.render("streamer", { userName: id, roomName: room, streamer: true });
+    } else if (isViewer(id, room)) {
+        res.render("viewer", { userName: id, roomName: room, streamer: false });
+    } else {
+        console.log("incorrect");
+        res.render("join");
+        //not member
+        // res.json({ alertmsg: "incorrect id" });
+    }
+
+}
+
+streamingRouter.get("/join", getJoin);
+streamingRouter.post("/join", postJoin);
+
 export default streamingRouter;
 
 function makePassword(accessKey = '', password = 'ThisIsA_SecretKeyForLivExpert_SW11_JDK!@') {
     let hash = cryptoJS.HmacSHA256(accessKey, password);
     return cryptoJS.enc.Base64.stringify(hash);
+}
+
+function isStreamer(id, room) {
+    for (let i = 0; i < roomInfo.length; i++) {
+        if (room == roomInfo[i].roomName) {
+            if (id == roomInfo[i].streamerId) {
+                return true;
+            }
+            return false;
+        }
+    }
+    return false;
+}
+
+function isViewer(id, room) {
+    for (let i = 0; i < roomInfo.length; i++) {
+        if (room == roomInfo[i].roomName) {
+            for (let j = 0; j < roomInfo[i].membersId.length; j++) {
+                if (id == roomInfo[i].membersId[j]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+    return false;
 }
