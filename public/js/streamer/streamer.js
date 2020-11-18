@@ -209,6 +209,47 @@ function audioOutputEnableHandler() {
     }
 }
 
+
+function getStream() {
+    gotDevices();
+    if (window.stream) {
+        window.stream.getTracks().forEach(track => {
+            track.stop();
+        });
+    }
+    const audioSource = audioSelect.value;
+    const videoSource = videoSelect.value;
+    console.log(audioSource, videoSource);
+    const constraints = {
+        audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
+        video: { deviceId: videoSource ? { exact: videoSource } : undefined }
+    };
+    return navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(gotStream)
+        .catch(handleError);
+}
+
+function gotStream(stream) {
+    //window.stream에 로컬 MediaStream객체 저장.
+    window.stream = stream;
+
+    //로컬 MediaStream의 video와 audio를 selected한다. 제일 처음을 위해서..
+    audioSelect.selectedIndex = [...audioSelect.options].findIndex(
+        option => option.text === stream.getAudioTracks()[0].label
+    );
+    videoSelect.selectedIndex = [...videoSelect.options].findIndex(
+        option => option.text === stream.getVideoTracks()[0].label
+    );
+    //로컬비디오에도 스트림을 등록시킨다.
+    videoElement.srcObject = window.stream;
+    //Enable check
+    videoEnableHandler(videoEnable);
+    audioEnableHandler(audioEnable);
+    //스트리머는 스트림을 주고받을 준비가 완료됨.
+    socket.emit(EVENT.STREAMER_READY, roomName);
+}
+
 function changeDeviceHandler() {
     gotDevices();
     if (videoElement.srcObject) {
@@ -267,8 +308,8 @@ videoSelect.onchange = changeVideoHandler;
 audioSelect.onchange = changeAudioHandler;
 audioOutputSelect.onchange = changeAudioDestination;
 
-//navigator.mediaDevices.ondevicechange = changeDeviceHandler;
+navigator.mediaDevices.ondevicechange = getStream;
 
 socket.emit(EVENT.JOINROOM, { userName, roomName });
 
-streamInit();
+getStream();

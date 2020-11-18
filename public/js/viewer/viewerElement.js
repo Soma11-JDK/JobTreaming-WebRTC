@@ -15,15 +15,6 @@ const config = {
         {
             "urls": "turn:3.35.191.156", "username": "wldud", "credential": "fjssj"
         },
-        // {
-        //     "urls": "turn:3.35.191.156:3478?transport=udp", "username": "wldud", "credential": "fjssj"
-        // },
-        // {
-        //     "urls": "turn:172.31.8.128:3478?transport=tcp", "username": "wldud", "credential": "fjssj"
-        // },
-        // {
-        //     "urls": "turn:172.31.8.128:3478?transport=udp", "username": "wldud", "credential": "fjssj"
-        // },
         // { 
         //   "urls": "turn:TURN_IP?transport=tcp",
         //   "username": "TURN_USERNAME",
