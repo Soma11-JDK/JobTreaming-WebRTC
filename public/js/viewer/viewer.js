@@ -1,4 +1,5 @@
 window.onunload = window.onbeforeunload = () => {
+    peerConnection.close();
     socket.close();
 };
 
