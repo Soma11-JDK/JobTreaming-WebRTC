@@ -48,7 +48,7 @@ const getStreaming = (req, res) => {
     }
 }
 
-streamingRouter.get("/", (req, res) => res.render("join", { lectureId: req.query.lectureId, jwt: req.query.jwt }));
+streamingRouter.get("/", (req, res) => res.render("join", { "lectureId": req.query.lectureId, "jwt": req.query.jwt }));
 streamingRouter.post("/join", getStreaming);
 
 export default streamingRouter;
