@@ -9,6 +9,6 @@ html
                 img.join__img(src="img/logo.png")
                 p.welcome-header__text Jobtreaming의 ID / Room 을 입력하세요.
             form(action="/join",method="post",id="login-form")
-                input(name="lectureId",type="text",placeholder="lectureId")
-                input(name="jwt",type="text",placeholder="jwt")
+                input(name="lectureId",type="text",placeholder="lectureId",defaultValue= #{lectureId})
+                input(name="jwt",type="text",placeholder="jwt", defaultValue=#{jwt})
                 input(type="submit",value="Join")
