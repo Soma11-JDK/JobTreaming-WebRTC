@@ -1,7 +1,3 @@
-socket.on('join-success', () => {
-    socket.emit(EVENT.VIEWER_READY, roomName);
-});
-
 socket.on(EVENT.OFFER, (data) => {
     console.log('receive offer');
     const { streamerId } = data;

@@ -314,6 +314,9 @@ audioOutputSelect.onchange = changeAudioDestination;
 
 navigator.mediaDevices.ondevicechange = getStream;
 
-socket.emit(EVENT.JOINROOM, { userName, roomName });
+window.addEventListener("load", () => { socket.emit(EVENT.JOINROOM, { userName, roomName }); });
 
-getStream();
+socket.on('join-success', () => {
+    console.log('join-suceess');
+    getStream();
+})

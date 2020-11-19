@@ -1,7 +1,3 @@
-socket.on('join-success', () => {
-    console.log('join-suceess');
-})
-
 socket.on(EVENT.VIEWER_READY, viewerId => {
     //새로운 viewer의 PeerConnection를 만듦
     const peerConnection = new RTCPeerConnection(config);
